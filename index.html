@@ -884,11 +884,8 @@ textarea.inp{resize:vertical;line-height:1.6}
     <!-- VOYAGE -->
     <div class="pg" id="pg-voyage">
       <div class="plbl">✦ Voyage</div><div class="ptit">Mes voyages</div><div class="pdsc">Planifie tes aventures ✈️</div>
-      <div style="text-align:center;padding:60px 20px">
-        <div style="font-size:64px;margin-bottom:20px">✈️</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:12px">Bientôt disponible</div>
-        <div style="font-size:14px;color:var(--tl);line-height:1.7">Cette section est en cours de développement.<br>Elle sera disponible très prochainement 🌸</div>
-      </div>
+      <button class="btn btnp" style="width:100%;margin-bottom:16px;font-size:15px;padding:14px" onclick="openNewTrip()">+ Ajouter un voyage</button>
+      <div id="trips-list"></div>
     </div>
 
     <!-- PAGE DÉTAIL VOYAGE -->
@@ -897,97 +894,51 @@ textarea.inp{resize:vertical;line-height:1.6}
         <button onclick="go('voyage')" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--tm);padding:0;touch-action:manipulation">←</button>
         <div class="plbl" style="margin:0">✦ Voyage</div>
       </div>
-      <div class="ptit" id="trip-detail-title">Mon voyage</div>
-      <div class="pdsc" id="trip-detail-dates"></div>
-      <!-- Tabs navigation -->
-      <div class="trip-tabs-row" style="display:flex;gap:8px;margin-bottom:18px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch">
-        <button class="td-tab active" id="tdt-iti"     onclick="setTripDetailTab('iti')">🗓️ Itinéraire</button>
-        <button class="td-tab"        id="tdt-resa"    onclick="setTripDetailTab('resa')">🎫 Réservations</button>
-        <button class="td-tab"        id="tdt-budget"  onclick="setTripDetailTab('budget')">💰 Budget</button>
-        <button class="td-tab"        id="tdt-bagages" onclick="setTripDetailTab('bagages')">🧳 Bagages</button>
-        <button class="td-tab"        id="tdt-conv"    onclick="setTripDetailTab('conv')">💱 Devise</button>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:18px">
+        <div style="flex:1;min-width:0">
+          <div class="ptit" id="trip-detail-title" style="margin-bottom:2px">Mon voyage</div>
+          <div class="pdsc" id="trip-detail-dates"></div>
+          <div id="trip-detail-countdown" style="font-size:13px;font-weight:500;margin-top:4px"></div>
+        </div>
+        <button class="btn btns btnsm" onclick="editTrip()" style="flex-shrink:0">✏️ Modifier</button>
       </div>
 
-      <!-- BAGAGES -->
-      <div id="trip-sec-iti">
-        <div class="card">
-          <div class="ctit">🗓️ Itinéraire jour par jour</div>
-          <div class="row">
-            <input class="inp" id="iti-day" placeholder="Ex: Jour 1 — Arrivée à Tokyo" style="flex:2">
-            <button class="btn btnp btnsm" onclick="addItiDay()">+ Jour</button>
-          </div>
-          <div id="iti-list"><div class="emp"><div class="ei">🗓️</div><div class="et">Aucun jour planifié</div></div></div>
+      <!-- VALISE -->
+      <div class="card">
+        <div class="ctit">🧳 Valise <span id="trip-valise-prog" style="font-size:12px;color:var(--tm);font-weight:400;margin-left:6px"></span></div>
+        <div class="row">
+          <input class="inp" id="trip-valise-inp" placeholder="Ex: T-shirts, chargeur..." style="flex:1" onkeydown="if(event.key==='Enter'){addTripItem('valise')}">
+          <button class="btn btnp btnsm" onclick="addTripItem('valise')">+ Ajouter</button>
         </div>
+        <div id="trip-valise-list" style="margin-top:10px"></div>
       </div>
-      <div id="trip-sec-resa" style="display:none">
-        <div class="card">
-          <div class="ctit">🎫 Réservations</div>
-          <div class="row">
-            <select class="inp" id="resa-cat" style="flex:1">
-              <option value="vol">✈️ Vol</option>
-              <option value="hotel">🏨 Hôtel</option>
-              <option value="train">🚆 Train</option>
-              <option value="voiture">🚗 Location voiture</option>
-              <option value="activite">🎡 Activité</option>
-              <option value="autre">📋 Autre</option>
-            </select>
-            <input class="inp" id="resa-ref" placeholder="N° confirmation" style="flex:1">
-          </div>
-          <div class="row">
-            <input class="inp" id="resa-name" placeholder="Nom (compagnie, hôtel...)" style="flex:2">
-            <input class="inp" id="resa-date" type="date" style="flex:1">
-          </div>
-          <button class="btn btnp" style="width:100%" onclick="addResa()">+ Ajouter</button>
-          <div id="resa-list" style="margin-top:8px"><div class="emp"><div class="ei">🎫</div><div class="et">Aucune réservation</div></div></div>
+
+      <!-- LIEUX -->
+      <div class="card">
+        <div class="ctit">📍 Lieux à visiter <span id="trip-lieux-prog" style="font-size:12px;color:var(--tm);font-weight:400;margin-left:6px"></span></div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+          <button class="rf on" id="lieu-type-ville" onclick="setLieuType('ville')">🏙️ Ville</button>
+          <button class="rf" id="lieu-type-monument" onclick="setLieuType('monument')">🏛️ Monument</button>
+          <button class="rf" id="lieu-type-lieu" onclick="setLieuType('lieu')">📍 Lieu</button>
         </div>
-      </div>
-      <div id="trip-sec-budget" style="display:none">
-        <div class="card">
-          <div class="ctit">💰 Budget du voyage</div>
-          <div class="row">
-            <input class="inp" id="trip-budget-total" type="number" placeholder="Budget prévu (€)" style="flex:1">
-            <button class="btn btng btnsm" onclick="setTripBudget()">Définir</button>
-          </div>
-          <div class="pw" style="margin-bottom:12px"><div class="pt"><span id="trip-bpct">0%</span><span id="trip-bleft">0 € restant</span></div><div class="pb"><div class="pf" id="trip-bbar" style="width:0%"></div></div></div>
-          <div class="row">
-            <input class="inp" id="tdep-n" placeholder="Dépense..." style="flex:2">
-            <input class="inp" id="tdep-a" type="number" placeholder="€" style="flex:1;min-width:60px">
-            <button class="btn btnp btnsm" onclick="addTripDep()">+</button>
-          </div>
-          <div id="trip-deps"><div class="emp"><div class="ei">💸</div><div class="et">Aucune dépense</div></div></div>
+        <div class="row">
+          <input class="inp" id="trip-lieux-inp" placeholder="Ex: Tour Eiffel, Lisbonne..." style="flex:1" onkeydown="if(event.key==='Enter'){addTripItem('lieux')}">
+          <button class="btn btnp btnsm" onclick="addTripItem('lieux')">+ Ajouter</button>
         </div>
+        <div id="trip-lieux-list" style="margin-top:10px"></div>
       </div>
-      <div id="trip-sec-bagages" style="display:none">
-        <div class="bag-tabs-row" style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch">
-          <button class="bag-tab active" id="bagt-cabine" onclick="setBagTab('cabine')">🎒 Cabine</button>
-          <button class="bag-tab" id="bagt-soute" onclick="setBagTab('soute')">🧳 Soute</button>
-          <button class="bag-tab" id="bagt-sacmain" onclick="setBagTab('sacmain')">👜 Sac à main</button>
+
+      <!-- PAPIERS -->
+      <div class="card">
+        <div class="ctit">📄 Papiers à ne pas oublier <span id="trip-papiers-prog" style="font-size:12px;color:var(--tm);font-weight:400;margin-left:6px"></span></div>
+        <div class="row">
+          <input class="inp" id="trip-papiers-inp" placeholder="Ex: Passeport, assurance..." style="flex:1" onkeydown="if(event.key==='Enter'){addTripItem('papiers')}">
+          <button class="btn btnp btnsm" onclick="addTripItem('papiers')">+ Ajouter</button>
         </div>
-        <div id="bag-content"></div>
+        <div id="trip-papiers-list" style="margin-top:10px"></div>
       </div>
-      <div id="trip-sec-conv" style="display:none">
-        <div class="card">
-          <div class="ctit">💱 Convertisseur</div>
-          <div class="row">
-            <input class="inp" id="conv-amt" type="number" placeholder="Montant" style="flex:1">
-            <select class="inp" id="conv-from" style="flex:1">
-              <option value="EUR">EUR €</option><option value="USD">USD $</option><option value="GBP">GBP £</option>
-              <option value="JPY">JPY ¥</option><option value="MAD">MAD</option><option value="CHF">CHF</option>
-              <option value="CAD">CAD</option><option value="AUD">AUD</option><option value="TND">TND</option>
-            </select>
-          </div>
-          <div class="row">
-            <div style="flex:1;text-align:center;font-size:20px;color:var(--tm)">↕️</div>
-            <select class="inp" id="conv-to" style="flex:1">
-              <option value="USD">USD $</option><option value="EUR">EUR €</option><option value="GBP">GBP £</option>
-              <option value="JPY">JPY ¥</option><option value="MAD">MAD</option><option value="CHF">CHF</option>
-              <option value="CAD">CAD</option><option value="AUD">AUD</option><option value="TND">TND</option>
-            </select>
-          </div>
-          <button class="btn btnp" style="width:100%;margin-bottom:10px" onclick="convertCurrency()">Convertir</button>
-          <div id="conv-result" style="text-align:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--text)"></div>
-        </div>
-      </div>
+
+      <button class="btn btnr" style="width:100%;margin-top:8px" onclick="delTripFromDetail()">🗑️ Supprimer ce voyage</button>
     </div>
 
     <!-- MONDE -->
@@ -1180,7 +1131,7 @@ textarea.inp{resize:vertical;line-height:1.6}
 <div class="mbg" id="trip-modal">
   <div class="modal">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-      <div class="mtit" style="margin:0">✈️ Nouveau voyage</div>
+      <div class="mtit" id="trip-modal-title" style="margin:0">✈️ Nouveau voyage</div>
       <button style="background:none;border:none;cursor:pointer;font-size:20px;color:var(--tm)" onclick="closeModal('trip-modal')">✕</button>
     </div>
     <input class="inp" id="trip-dest" placeholder="Destination... (ex: Tokyo, Marrakech)" style="margin-bottom:10px">
@@ -1188,8 +1139,20 @@ textarea.inp{resize:vertical;line-height:1.6}
       <div style="flex:1"><div style="font-size:12px;color:var(--tm);margin-bottom:5px">Départ 🛫</div><input class="inp" id="trip-from" type="date"></div>
       <div style="flex:1"><div style="font-size:12px;color:var(--tm);margin-bottom:5px">Retour 🛬</div><input class="inp" id="trip-to" type="date"></div>
     </div>
-    <textarea class="inp" id="trip-notes" placeholder="Notes (passeport n°, assurance...)" style="min-height:60px;margin-bottom:14px"></textarea>
-    <button class="btn btnp" style="width:100%" onclick="saveTrip()">Créer le voyage ✈️</button>
+    <textarea class="inp" id="trip-notes" placeholder="Notes (optionnel)" style="min-height:60px;margin:10px 0 14px"></textarea>
+    <button class="btn btnp" style="width:100%" onclick="saveTrip()" id="trip-save-btn">Créer le voyage ✈️</button>
+  </div>
+</div>
+
+<!-- MODALE DE CONFIRMATION CUSTOM (remplace window.confirm bloqué) -->
+<div class="mbg" id="confirm-modal">
+  <div class="modal" style="max-width:340px">
+    <div class="mtit" id="confirm-title" style="margin-bottom:10px">Confirmer ?</div>
+    <div id="confirm-msg" style="font-size:14px;color:var(--tl);line-height:1.6;margin-bottom:20px">Es-tu sûre ?</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btns" id="confirm-no-btn" style="flex:1">Annuler</button>
+      <button class="btn btnr" id="confirm-yes-btn" style="flex:1">Supprimer</button>
+    </div>
   </div>
 </div>
 
@@ -1430,26 +1393,107 @@ const SB_URL='https://hrgtrwqvsyadbgsbneeu.supabase.co';
 const SB_KEY='sb_publishable_fXntuF_eCYRrhkGXO_7evg_CpIN0HeQ';
 function uid(){let id=localStorage.getItem('orisa_uid');if(!id){id='u_'+Math.random().toString(36).slice(2)+Date.now();localStorage.setItem('orisa_uid',id);}return id;}
 async function save(){
+  // localStorage = priorité absolue, synchrone, instantané
   try{localStorage.setItem('orisa_v4',JSON.stringify(S));}catch(e){}
-  try{await fetch(`${SB_URL}/rest/v1/user_data`,{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({user_id:uid(),data:S})});}catch(e){}
+  // Supabase = sync best-effort, ne bloque jamais l'utilisateur
+  try{
+    const res = await fetch(`${SB_URL}/rest/v1/user_data`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({user_id:uid(),data:S})
+    });
+    // Si Supabase répond avec un échec, on retente une fois après 1s (cas réseau lent)
+    if(!res.ok){
+      setTimeout(()=>{
+        try{
+          fetch(`${SB_URL}/rest/v1/user_data`,{
+            method:'POST',
+            headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates'},
+            body:JSON.stringify({user_id:uid(),data:S})
+          });
+        }catch(e){}
+      }, 1000);
+    }
+  }catch(e){}
 }
 async function load(){
+  // 1) Lecture localStorage en premier (rapide, fiable)
   try{const d=localStorage.getItem('orisa_v4');if(d){const parsed=JSON.parse(d);Object.assign(S,parsed);}}catch(e){}
+
+  // 2) Snapshot des données locales AVANT le merge avec Supabase
+  // Ça permet de restaurer une donnée qui n'aurait pas encore été synchronisée côté Supabase
+  const localTripsBackup  = Array.isArray(S.trips)  ? S.trips.map(t  => JSON.parse(JSON.stringify(t)))  : [];
+  const localFichesBackup = Array.isArray(S.fiches) ? S.fiches.map(f => JSON.parse(JSON.stringify(f))) : [];
+
+  // 3) Fetch Supabase
   try{
     const r=await fetch(`${SB_URL}/rest/v1/user_data?user_id=eq.${uid()}&select=data`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
     const rows=await r.json();
     if(rows&&rows.length>0&&rows[0].data){
       const remote=rows[0].data;
-      // Pour les voyages : fusionner local + remote par ID pour ne jamais perdre de données
-      if(remote.trips&&S.trips&&S.trips.length>0){
-        const merged=[...remote.trips];
-        S.trips.forEach(t=>{if(!merged.find(x=>x.id===t.id))merged.push(t);});
-        remote.trips=merged;
+      // Voyages : merge intelligent par ID, en privilégiant la version avec le PLUS d'items
+      // (pour ne jamais perdre des items ajoutés localement mais pas encore syncés)
+      if(Array.isArray(remote.trips) || Array.isArray(S.trips)){
+        const remoteTrips = Array.isArray(remote.trips) ? remote.trips : [];
+        const localTrips  = Array.isArray(S.trips)      ? S.trips      : [];
+        const byId = {};
+        remoteTrips.forEach(t => { if(t && t.id != null) byId[t.id] = t; });
+        localTrips.forEach(lt => {
+          if(!lt || lt.id == null) return;
+          const rt = byId[lt.id];
+          if(!rt){
+            byId[lt.id] = lt;
+          } else {
+            const localCount  = (lt.valise ||[]).length + (lt.lieux ||[]).length + (lt.papiers ||[]).length;
+            const remoteCount = (rt.valise ||[]).length + (rt.lieux ||[]).length + (rt.papiers ||[]).length;
+            if(localCount > remoteCount) byId[lt.id] = lt;
+          }
+        });
+        remote.trips = Object.values(byId);
       }
+
+      // Fiches : merge intelligent par ID — on garde toutes les fiches uniques,
+      // et pour les fiches modifiées localement, on garde la version la plus longue (Q+R)
+      if(Array.isArray(remote.fiches) || Array.isArray(S.fiches)){
+        const remoteFiches = Array.isArray(remote.fiches) ? remote.fiches : [];
+        const localFiches  = Array.isArray(S.fiches)      ? S.fiches      : [];
+        const byId = {};
+        remoteFiches.forEach(f => { if(f && f.id != null) byId[f.id] = f; });
+        localFiches.forEach(lf => {
+          if(!lf || lf.id == null) return;
+          const rf = byId[lf.id];
+          if(!rf){
+            byId[lf.id] = lf;
+          } else {
+            // Si la version locale a un contenu plus riche, on la garde
+            const localLen  = (lf.q ||'').length + (lf.r ||'').length;
+            const remoteLen = (rf.q ||'').length + (rf.r ||'').length;
+            if(localLen > remoteLen) byId[lf.id] = lf;
+          }
+        });
+        remote.fiches = Object.values(byId);
+      }
+
       Object.assign(S,remote);
+      if(!Array.isArray(S.trips))  S.trips  = [];
+      if(!Array.isArray(S.fiches)) S.fiches = [];
+
+      // 4) Filet de sécurité ULTIME : si une donnée du backup local a disparu après le merge, on la restaure
+      localTripsBackup.forEach(lt => {
+        if(lt && lt.id != null && !S.trips.find(x => x.id === lt.id)){
+          S.trips.push(lt);
+        }
+      });
+      localFichesBackup.forEach(lf => {
+        if(lf && lf.id != null && !S.fiches.find(x => x.id === lf.id)){
+          S.fiches.push(lf);
+        }
+      });
+
       localStorage.setItem('orisa_v4',JSON.stringify(S));
     }
   }catch(e){}
+
   // Safety: if sections all false and user has started, restore them all
   if(localStorage.getItem('orisa_started')&&S.sections&&Object.values(S.sections).every(v=>!v)){
     S.sections={budget:true,orga:true,bien:true,cuisine:true};
@@ -1602,6 +1646,8 @@ function go(id){
   document.getElementById('pg-'+id).classList.add('on');
   document.querySelectorAll(`.si[onclick*="'${id}'"]`).forEach(i=>i.classList.add('on'));
   if(id==='monde'){setTimeout(()=>{try{initWorldMap();updateCountersMap();}catch(e){}},50);}
+  if(id==='voyage'){try{renderTrips();}catch(e){}}
+  if(id==='fiches'){try{renderFiches();}catch(e){}}
   closeSb();
 }
 function openSb(){document.getElementById('sb').classList.add('on');document.getElementById('sbo').classList.add('on');}
@@ -2604,26 +2650,97 @@ function checkDailyHabitNotifs(){if(Notification.permission!=='granted')return;c
 function checkMedNotifs(){if(Notification.permission!=='granted')return;const k='orisa_med_check';const today=new Date().toDateString();if(localStorage.getItem(k)===today)return;localStorage.setItem(k,today);const notifMeds=(S.meds||[]).filter(m=>m.notif);if(!notifMeds.length)return;setTimeout(()=>{notifMeds.forEach(m=>{new Notification('💊 Orisa — Médicament',{body:'N\'oublie pas : '+m.name+' — '+m.freq,icon:'https://placehold.co/64/F2A7B8/fff?text=O'});});},3000);}
 
 // ════════════════════════════════════
-// VOYAGE
-// ════════════════════════════════════
-// ════════════════════════════════════
-// VOYAGE
+// VOYAGE — version simple : valise + lieux + papiers
 // ════════════════════════════════════
 let currentTripId = null;
+let currentLieuType = 'ville';
 
-// ════ VOYAGE JS ════════════════════════
-const BAG_TYPES = {
-  cabine:  {label:'🎒 Bagage cabine'},
-  soute:   {label:'🧳 Bagage soute'},
-  sacmain: {label:'👜 Sac à main'},
-};
-const BAG_CATS = ['Vêtements','Hygiène','Électronique','Documents','Accessoires','Médicaments','Nourriture','Autre'];
+function escapeHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+// Confirmation custom : remplace window.confirm() qui peut être bloqué dans certains contextes
+function askConfirm(opts){
+  return new Promise(resolve => {
+    const modal = document.getElementById('confirm-modal');
+    const title = document.getElementById('confirm-title');
+    const msg   = document.getElementById('confirm-msg');
+    const yes   = document.getElementById('confirm-yes-btn');
+    const no    = document.getElementById('confirm-no-btn');
+    if(!modal || !yes || !no){
+      // fallback ultime si la modale n'existe pas
+      resolve(window.confirm(opts.message || 'Confirmer ?'));
+      return;
+    }
+    title.textContent = opts.title    || 'Confirmer ?';
+    msg.textContent   = opts.message  || '';
+    yes.textContent   = opts.yesLabel || 'Confirmer';
+    no.textContent    = opts.noLabel  || 'Annuler';
+    yes.className     = 'btn ' + (opts.danger === false ? 'btnp' : 'btnr');
+    yes.style.flex = '1';
+    no.style.flex  = '1';
+    modal.classList.add('on');
+    const cleanup = () => {
+      modal.classList.remove('on');
+      yes.onclick = null;
+      no.onclick  = null;
+    };
+    yes.onclick = () => { cleanup(); resolve(true); };
+    no.onclick  = () => { cleanup(); resolve(false); };
+  });
+}
+
+
+function formatTripDateFr(dateStr){
+  if(!dateStr) return '';
+  const parts = dateStr.split('-');
+  if(parts.length !== 3) return dateStr;
+  const months = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  return `${parseInt(parts[2])} ${months[parseInt(parts[1])-1]} ${parts[0]}`;
+}
+
+function getTripStatus(t){
+  if(!t.from && !t.to) return {label:'Dates à définir', color:'var(--tm)'};
+  const now = new Date(); now.setHours(0,0,0,0);
+  const start = t.from ? new Date(t.from + 'T00:00') : null;
+  const end   = t.to   ? new Date(t.to + 'T00:00')   : null;
+  if(start && start > now){
+    const days = Math.ceil((start - now)/(1000*60*60*24));
+    if(days === 1) return {label:'Demain ! 🎉', color:'var(--ad)'};
+    if(days <= 7)  return {label:`Dans ${days} jours ✨`, color:'var(--ad)'};
+    return {label:`Dans ${days} jours`, color:'var(--ad)'};
+  }
+  if(start && end && start <= now && end >= now){
+    return {label:'En cours ✨', color:'#2E7D32'};
+  }
+  if(end && end < now){
+    return {label:'Terminé', color:'var(--tm)'};
+  }
+  return {label:'', color:'var(--tm)'};
+}
 
 function openNewTrip(){
+  document.getElementById('trip-modal-title').textContent = '✈️ Nouveau voyage';
+  document.getElementById('trip-save-btn').textContent = 'Créer le voyage ✈️';
   document.getElementById('trip-dest').value='';
   document.getElementById('trip-from').value='';
   document.getElementById('trip-to').value='';
   document.getElementById('trip-notes').value='';
+  document.getElementById('trip-modal').dataset.editing = '';
+  document.getElementById('trip-modal').classList.add('on');
+  setTimeout(()=>{ const d=document.getElementById('trip-dest'); if(d) d.focus(); }, 200);
+}
+
+function editTrip(){
+  const t = (S.trips||[]).find(x => x.id === currentTripId);
+  if(!t) return;
+  document.getElementById('trip-modal-title').textContent = '✏️ Modifier le voyage';
+  document.getElementById('trip-save-btn').textContent = 'Enregistrer ✓';
+  document.getElementById('trip-dest').value = t.dest || '';
+  document.getElementById('trip-from').value = t.from || '';
+  document.getElementById('trip-to').value = t.to || '';
+  document.getElementById('trip-notes').value = t.notes || '';
+  document.getElementById('trip-modal').dataset.editing = String(t.id);
   document.getElementById('trip-modal').classList.add('on');
 }
 
@@ -2631,23 +2748,38 @@ async function saveTrip(){
   const dest = document.getElementById('trip-dest').value.trim();
   if(!dest) return toast('Indique une destination 😊');
   if(!S.trips) S.trips = [];
+
+  const editingId = document.getElementById('trip-modal').dataset.editing;
+  const from  = document.getElementById('trip-from').value;
+  const to    = document.getElementById('trip-to').value;
+  const notes = document.getElementById('trip-notes').value;
+
+  if(editingId){
+    const t = S.trips.find(x => String(x.id) === String(editingId));
+    if(t){
+      t.dest = dest; t.from = from; t.to = to; t.notes = notes;
+    }
+    closeModal('trip-modal');
+    save();
+    renderTrips();
+    if(currentTripId && t && currentTripId === t.id) renderTripDetail();
+    toast('Voyage mis à jour ✨');
+    return;
+  }
+
+  // Nouveau voyage
   const id = Date.now();
-  const makeBag = () => {
-    const b = {};
-    BAG_CATS.forEach(c => b[c] = []);
-    return b;
-  };
   const trip = {
-    id, dest,
-    from: document.getElementById('trip-from').value,
-    to:   document.getElementById('trip-to').value,
-    notes: document.getElementById('trip-notes').value,
-    bagages: { cabine: makeBag(), soute: makeBag(), sacmain: makeBag() },
-    itinerary: [], reservations: [], deps: [], budget: 0
+    id, dest, from, to, notes,
+    valise:  [],
+    lieux:   [],
+    papiers: [],
+    createdAt: Date.now()
   };
   S.trips.push(trip);
   currentTripId = id;
-  // Sauvegarder immédiatement en localStorage ET Supabase avant toute navigation
+
+  // Sauvegarde immédiate (localStorage + Supabase) avant navigation
   try { localStorage.setItem('orisa_v4', JSON.stringify(S)); } catch(e) {}
   try {
     await fetch(`${SB_URL}/rest/v1/user_data`, {
@@ -2656,146 +2788,263 @@ async function saveTrip(){
       body: JSON.stringify({user_id: uid(), data: S})
     });
   } catch(e) {}
+
   closeModal('trip-modal');
   renderTrips();
-  toast('Voyage créé et sauvegardé ✈️');
+  toast('Voyage créé ✈️');
   openTripDetail(id);
 }
 
 function openTripDetail(id){
   currentTripId = id;
-  const t = S.trips.find(x => x.id === id); if(!t) return;
-  document.getElementById('trip-detail-title').textContent = t.dest;
-  const dates = t.from && t.to
-    ? t.from.split('-').reverse().join('/') + ' → ' + t.to.split('-').reverse().join('/')
-    : t.from ? t.from.split('-').reverse().join('/') : '';
-  document.getElementById('trip-detail-dates').textContent = dates;
-  const btInput = document.getElementById('trip-budget-total');
-  if(btInput) btInput.value = t.budget || '';
+  const t = (S.trips||[]).find(x => x.id === id);
+  if(!t) return;
+  // Migration douce : initialise les nouveaux champs s'ils n'existent pas
+  if(!Array.isArray(t.valise))  t.valise  = [];
+  if(!Array.isArray(t.lieux))   t.lieux   = [];
+  if(!Array.isArray(t.papiers)) t.papiers = [];
   go('trip-detail');
-  setTripDetailTab('iti');
-  setBagTab('cabine');
-  renderTripIti(); renderTripResa(); renderTripBudget();
+  // Reset le sélecteur de type lieu sur "ville" à l'ouverture
+  setLieuType('ville');
+  renderTripDetail();
 }
 
-function delTrip(id){
-  S.trips = (S.trips||[]).filter(x => x.id !== id);
-  save(); renderTrips(); toast('Voyage supprimé');
+async function delTripFromDetail(){
+  const trip = (S.trips||[]).find(x => x.id === currentTripId);
+  if(!trip) return;
+  const ok = await askConfirm({
+    title: 'Supprimer ce voyage ?',
+    message: 'Le voyage « ' + (trip.dest||'?') + ' » et toutes ses données (valise, lieux, papiers) seront supprimés définitivement.',
+    yesLabel: '🗑️ Supprimer',
+    noLabel: 'Annuler'
+  });
+  if(!ok) return;
+  S.trips = (S.trips||[]).filter(x => x.id !== currentTripId);
+  save();
+  go('voyage');
+  renderTrips();
+  toast('Voyage supprimé');
+}
+
+async function delTrip(id){
+  const trip = (S.trips||[]).find(x => x.id === id);
+  if(!trip) return;
+  const ok = await askConfirm({
+    title: 'Supprimer ce voyage ?',
+    message: 'Le voyage « ' + (trip.dest||'?') + ' » et toutes ses données (valise, lieux, papiers) seront supprimés définitivement.',
+    yesLabel: '🗑️ Supprimer',
+    noLabel: 'Annuler'
+  });
+  if(!ok) return;
+  S.trips = S.trips.filter(x => x.id !== id);
+  save();
+  renderTrips();
+  toast('Voyage supprimé');
 }
 
 function renderTrips(){
-  const el = document.getElementById('trips-list'); if(!el) return;
-  if(!S.trips||!S.trips.length){
-    el.innerHTML = '<div class="emp"><div class="ei">✈️</div><div class="et">Aucun voyage — crée le premier !</div></div>';
+  const el = document.getElementById('trips-list');
+  if(!el) return;
+  if(!S.trips || !S.trips.length){
+    el.innerHTML = '<div class="emp"><div class="ei">✈️</div><div class="et">Aucun voyage pour le moment.<br>Appuie sur « + Ajouter un voyage » pour commencer !</div></div>';
     return;
   }
-  el.innerHTML = S.trips.map(t => {
-    const dates = t.from && t.to
-      ? t.from.split('-').reverse().join('/') + ' → ' + t.to.split('-').reverse().join('/')
-      : t.from || 'Dates à définir';
-    const items = Object.values(t.bagages||{}).reduce((a,cat) => a + Object.values(cat).flat().length, 0);
-    return `<div class="trip-card" onclick="openTripDetail(${t.id})">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div style="flex:1">
-          <div style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:5px">${t.dest}</div>
-          <div style="font-size:13px;color:var(--tl);margin-bottom:6px">📅 ${dates}</div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            ${items ? `<span style="background:var(--al);border-radius:50px;padding:3px 9px;font-size:11px">🧳 ${items} articles</span>` : ''}
-            ${(t.itinerary||[]).length ? `<span style="background:#E8F5E9;border-radius:50px;padding:3px 9px;font-size:11px">🗓️ ${t.itinerary.length} jours</span>` : ''}
+  // Tri : à venir/en cours d'abord (plus proche → plus lointain), terminés ensuite
+  const now = new Date(); now.setHours(0,0,0,0);
+  const sorted = [...S.trips].sort((a,b) => {
+    const aEnd = a.to ? new Date(a.to+'T00:00') : null;
+    const bEnd = b.to ? new Date(b.to+'T00:00') : null;
+    const aFinished = aEnd && aEnd < now;
+    const bFinished = bEnd && bEnd < now;
+    if(aFinished !== bFinished) return aFinished ? 1 : -1;
+    if(!a.from && !b.from) return (b.id||0) - (a.id||0);
+    if(!a.from) return 1;
+    if(!b.from) return -1;
+    return a.from.localeCompare(b.from);
+  });
+  el.innerHTML = sorted.map(t => {
+    const status = getTripStatus(t);
+    const dates = (t.from && t.to)
+      ? `${formatTripDateFr(t.from)} → ${formatTripDateFr(t.to)}`
+      : t.from ? formatTripDateFr(t.from) : 'Dates à définir';
+    const valiseCount  = (t.valise ||[]).length;
+    const lieuxCount   = (t.lieux  ||[]).length;
+    const papiersCount = (t.papiers||[]).length;
+    return `<div class="trip-card" style="position:relative" data-trip-id="${t.id}">
+      <button type="button" class="trip-del-btn" data-del-id="${t.id}" style="position:absolute;top:8px;right:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:50%;background:#fff;border:1px solid var(--al);z-index:10;cursor:pointer;color:var(--text);padding:0" aria-label="Supprimer">✕</button>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-right:42px" data-open-id="${t.id}">
+        <div style="flex:1;min-width:0" data-open-id="${t.id}">
+          <div style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:5px" data-open-id="${t.id}">${escapeHtml(t.dest)}</div>
+          <div style="font-size:13px;color:var(--tl);margin-bottom:6px" data-open-id="${t.id}">📅 ${dates}</div>
+          ${status.label ? `<div style="font-size:12px;color:${status.color};font-weight:500;margin-bottom:8px" data-open-id="${t.id}">${status.label}</div>` : ''}
+          <div style="display:flex;gap:6px;flex-wrap:wrap" data-open-id="${t.id}">
+            ${valiseCount  ? `<span style="background:var(--al);border-radius:50px;padding:3px 9px;font-size:11px">🧳 ${valiseCount}</span>` : ''}
+            ${lieuxCount   ? `<span style="background:#E8F5E9;border-radius:50px;padding:3px 9px;font-size:11px">📍 ${lieuxCount}</span>` : ''}
+            ${papiersCount ? `<span style="background:#FFF4E0;border-radius:50px;padding:3px 9px;font-size:11px">📄 ${papiersCount}</span>` : ''}
           </div>
         </div>
-        <button class="del" onclick="event.stopPropagation();delTrip(${t.id})">✕</button>
       </div>
+    </div>`;
+  }).join('');
+
+  // Bind les events APRÈS le rendu — bien plus fiable que onclick inline
+  el.querySelectorAll('.trip-del-btn').forEach(btn => {
+    btn.addEventListener('click', function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      const id = parseInt(btn.dataset.delId, 10);
+      delTrip(id);
+    });
+  });
+  el.querySelectorAll('[data-open-id]').forEach(node => {
+    node.addEventListener('click', function(ev){
+      // Ne pas ouvrir si on a cliqué sur le bouton supprimer
+      if(ev.target.closest('.trip-del-btn')) return;
+      const id = parseInt(node.dataset.openId, 10);
+      openTripDetail(id);
+    });
+  });
+}
+
+function setLieuType(type){
+  currentLieuType = type;
+  ['ville','monument','lieu'].forEach(t => {
+    const btn = document.getElementById('lieu-type-'+t);
+    if(btn) btn.className = 'rf' + (t===type ? ' on' : '');
+  });
+}
+
+function currentTrip(){
+  if(!S.trips) S.trips = [];
+  return S.trips.find(x => x.id === currentTripId);
+}
+
+function renderTripDetail(){
+  const t = currentTrip();
+  if(!t) return;
+  // Header
+  const titleEl = document.getElementById('trip-detail-title');
+  if(titleEl) titleEl.textContent = t.dest || 'Mon voyage';
+  const dates = (t.from && t.to)
+    ? `${formatTripDateFr(t.from)} → ${formatTripDateFr(t.to)}`
+    : t.from ? formatTripDateFr(t.from) : 'Dates à définir';
+  const datesEl = document.getElementById('trip-detail-dates');
+  if(datesEl) datesEl.textContent = '📅 ' + dates;
+  const status = getTripStatus(t);
+  const cdEl = document.getElementById('trip-detail-countdown');
+  if(cdEl){
+    cdEl.textContent = status.label;
+    cdEl.style.color = status.color;
+  }
+  ['valise','lieux','papiers'].forEach(renderTripSection);
+}
+
+function renderTripSection(sec){
+  const t = currentTrip();
+  if(!t) return;
+  if(!Array.isArray(t[sec])) t[sec] = [];
+  const items  = t[sec];
+  const listEl = document.getElementById('trip-'+sec+'-list');
+  const progEl = document.getElementById('trip-'+sec+'-prog');
+
+  // Compteur de progression
+  const done = items.filter(x => x.done).length;
+  if(progEl) progEl.textContent = items.length ? `${done}/${items.length} cochés` : '';
+
+  if(!listEl) return;
+  if(!items.length){
+    const empty = {
+      valise:  {e:'🧳', t:'Aucun article ajouté'},
+      lieux:   {e:'📍', t:'Aucun lieu ajouté'},
+      papiers: {e:'📄', t:'Aucun papier ajouté'},
+    }[sec];
+    listEl.innerHTML = `<div class="emp" style="padding:20px 12px"><div class="ei">${empty.e}</div><div class="et">${empty.t}</div></div>`;
+    return;
+  }
+
+  const typeIcons   = {ville:'🏙️', monument:'🏛️', lieu:'📍'};
+  const typeLabels  = {ville:'Ville', monument:'Monument', lieu:'Lieu'};
+  const defaultIcon = {valise:'🧳', papiers:'📄'};
+
+  // Tri : non cochés d'abord, cochés à la fin
+  const sorted = [...items].sort((a,b) => (a.done?1:0) - (b.done?1:0));
+
+  listEl.innerHTML = sorted.map(item => {
+    const checked = !!item.done;
+    const checkbox = `<button onclick="event.stopPropagation();toggleTripItem('${sec}',${item.id})" aria-label="Cocher" style="width:24px;height:24px;border-radius:7px;border:2px solid ${checked?'#2E7D32':'var(--al)'};background:${checked?'#2E7D32':'#fff'};cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;flex-shrink:0;padding:0;transition:.15s;font-weight:700">${checked?'✓':''}</button>`;
+    const icon = sec==='lieux' ? (typeIcons[item.type]||'📍') : defaultIcon[sec];
+    const subText = sec==='lieux' && item.type ? typeLabels[item.type] : '';
+    return `<div class="li">
+      ${checkbox}
+      <div style="width:32px;height:32px;border-radius:9px;background:var(--al);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">${icon}</div>
+      <div class="lii">
+        <div class="ln" style="${checked?'text-decoration:line-through;opacity:.55':''}">${escapeHtml(item.nom)}</div>
+        ${subText ? `<div class="ls">${subText}</div>` : ''}
+      </div>
+      <button class="del" onclick="event.stopPropagation();delTripItem('${sec}',${item.id})" aria-label="Supprimer">✕</button>
     </div>`;
   }).join('');
 }
 
-function setTripDetailTab(tab){
-  ['iti','resa','budget','bagages','conv'].forEach(t => {
-    const sec = document.getElementById('trip-sec-'+t);
-    const btn = document.getElementById('tdt-'+t);
-    if(sec) sec.style.display = t===tab ? 'block' : 'none';
-    if(btn) btn.className = 'td-tab' + (t===tab ? ' active' : '');
-  });
-  if(tab === 'bagages') renderBagContent();
-}
-
-let currentBagType = 'cabine';
-function setBagTab(type){
-  currentBagType = type;
-  ['cabine','soute','sacmain'].forEach(t => {
-    const btn = document.getElementById('bagt-'+t);
-    if(btn) btn.className = 'bag-tab' + (t===type ? ' active' : '');
-  });
-  renderBagContent();
-}
-
-function renderBagContent(){
-  const el = document.getElementById('bag-content'); if(!el) return;
-  const t = S.trips.find(x => x.id===currentTripId); if(!t) return;
-  if(!t.bagages) t.bagages = {cabine:{},soute:{},sacmain:{}};
-  if(!t.bagages[currentBagType]) t.bagages[currentBagType] = {};
-  const bagData = t.bagages[currentBagType];
-  const typeInfo = BAG_TYPES[currentBagType];
-  const totalItems = Object.values(bagData).flat().length;
-  const doneItems  = Object.values(bagData).flat().filter(x => x.done).length;
-  let html = `<div style="margin-bottom:14px">
-    <div style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:3px">${typeInfo.label}</div>
-    <div style="font-size:12px;color:var(--tm)">${doneItems}/${totalItems} articles prêts</div>
-  </div>`;
-  BAG_CATS.forEach(cat => {
-    const items = bagData[cat] || [];
-    const safeId = 'bag-inp-' + cat.replace(/[^a-z]/gi,'');
-    html += `<div style="margin-bottom:16px">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tm);margin-bottom:8px">${cat}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        ${items.map((item,i) => `
-          <div style="display:inline-flex;align-items:center;gap:6px;background:${item.done?'#E8F5E9':'var(--al)'};border:1.5px solid ${item.done?'#81C784':'var(--al)'};border-radius:50px;padding:5px 12px;font-size:12px;cursor:pointer" onclick="toggleBagItem('${cat}',${i})">
-            <span style="width:16px;height:16px;border-radius:50%;border:1.5px solid ${item.done?'#388E3C':'var(--tm)'};background:${item.done?'#388E3C':'#fff'};display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#fff">${item.done?'✓':''}</span>
-            <span style="${item.done?'text-decoration:line-through;opacity:.6':''}">${item.name}</span>
-            <button onclick="event.stopPropagation();delBagItem('${cat}',${i})" style="background:none;border:none;cursor:pointer;color:var(--tm);font-size:11px;padding:0 0 0 2px">✕</button>
-          </div>`).join('')}
-      </div>
-      <div style="display:flex;gap:8px">
-        <input class="inp" id="${safeId}" placeholder="Ajouter dans ${cat}..." style="flex:1;font-size:13px;padding:8px 12px">
-        <button class="btn btnp btnsm" onclick="addBagItem('${cat}')">+</button>
-      </div>
-    </div>`;
-  });
-  el.innerHTML = html;
-}
-
-function addBagItem(cat){
-  const safeId = 'bag-inp-' + cat.replace(/[^a-z]/gi,'');
-  const inp = document.getElementById(safeId);
-  if(!inp||!inp.value.trim()) return;
-  const t = S.trips.find(x => x.id===currentTripId); if(!t) return;
-  if(!t.bagages[currentBagType][cat]) t.bagages[currentBagType][cat] = [];
-  t.bagages[currentBagType][cat].push({name: inp.value.trim(), done: false});
+function addTripItem(sec){
+  const inp = document.getElementById('trip-'+sec+'-inp');
+  if(!inp) return;
+  const nom = inp.value.trim();
+  if(!nom) return;
+  const t = currentTrip();
+  if(!t) return;
+  if(!Array.isArray(t[sec])) t[sec] = [];
+  const item = {
+    id: Date.now() + Math.floor(Math.random()*1000),
+    nom,
+    done: false
+  };
+  if(sec === 'lieux') item.type = currentLieuType;
+  t[sec].push(item);
   inp.value = '';
-  save(); renderBagContent();
+  save();
+  renderTripSection(sec);
+  // Petit feedback discret seulement pour l'ajout d'un lieu (pour confirmer le type)
+  if(sec === 'lieux'){
+    const labels = {ville:'🏙️ Ville ajoutée', monument:'🏛️ Monument ajouté', lieu:'📍 Lieu ajouté'};
+    toast(labels[currentLieuType] || 'Ajouté');
+  }
 }
-function delBagItem(cat,idx){ const t=S.trips.find(x=>x.id===currentTripId);if(!t)return;t.bagages[currentBagType][cat].splice(idx,1);save();renderBagContent(); }
-function toggleBagItem(cat,idx){ const t=S.trips.find(x=>x.id===currentTripId);if(!t)return;const item=t.bagages[currentBagType][cat][idx];if(item)item.done=!item.done;save();renderBagContent(); }
 
-function currentTrip(){ if(!S.trips)S.trips=[];return S.trips.find(x=>x.id===currentTripId); }
+function toggleTripItem(sec, id){
+  const t = currentTrip(); if(!t) return;
+  const item = (t[sec]||[]).find(x => x.id === id);
+  if(item) item.done = !item.done;
+  save();
+  renderTripSection(sec);
+}
 
-function addItiDay(){ const n=document.getElementById('iti-day').value.trim();if(!n)return;const t=currentTrip();if(!t)return;if(!t.itinerary)t.itinerary=[];t.itinerary.push({id:Date.now(),day:n});document.getElementById('iti-day').value='';save();renderTripIti(); }
-function delItiDay(id){ const t=currentTrip();if(!t)return;t.itinerary=(t.itinerary||[]).filter(x=>x.id!==id);save();renderTripIti(); }
-function renderTripIti(){ const el=document.getElementById('iti-list');if(!el)return;const t=currentTrip();if(!t||(t.itinerary||[]).length===0){el.innerHTML='<div class="emp"><div class="ei">🗓️</div><div class="et">Aucun jour planifié</div></div>';return;}el.innerHTML=t.itinerary.map((d,i)=>`<div class="li"><div class="icb" style="font-size:11px;font-weight:700;color:var(--ad)">${i+1}</div><div class="lii"><div class="ln">${d.day}</div></div><button class="del" onclick="delItiDay(${d.id})">✕</button></div>`).join(''); }
+function delTripItem(sec, id){
+  const t = currentTrip(); if(!t) return;
+  t[sec] = (t[sec]||[]).filter(x => x.id !== id);
+  save();
+  renderTripSection(sec);
+}
 
-function addResa(){ const cat=document.getElementById('resa-cat').value,ref=document.getElementById('resa-ref').value.trim(),name=document.getElementById('resa-name').value.trim(),date=document.getElementById('resa-date').value;if(!name&&!ref)return toast('Ajoute un nom ou référence 😊');const t=currentTrip();if(!t)return;if(!t.reservations)t.reservations=[];t.reservations.push({id:Date.now(),cat,name,ref,date});document.getElementById('resa-ref').value='';document.getElementById('resa-name').value='';document.getElementById('resa-date').value='';save();renderTripResa();toast('Réservation ajoutée 🎫'); }
-function delResa(id){ const t=currentTrip();if(!t)return;t.reservations=(t.reservations||[]).filter(x=>x.id!==id);save();renderTripResa(); }
-function renderTripResa(){ const el=document.getElementById('resa-list');if(!el)return;const t=currentTrip();const catInfo={vol:{e:'✈️',l:'Vol'},hotel:{e:'🏨',l:'Hôtel'},train:{e:'🚆',l:'Train'},voiture:{e:'🚗',l:'Voiture'},activite:{e:'🎡',l:'Activité'},autre:{e:'📋',l:'Autre'}};if(!t||(t.reservations||[]).length===0){el.innerHTML='<div class="emp"><div class="ei">🎫</div><div class="et">Aucune réservation</div></div>';return;}el.innerHTML=t.reservations.map(r=>{const ci=catInfo[r.cat||'autre']||catInfo.autre;return`<div class="li"><div class="icb">${ci.e}</div><div class="lii"><div class="ln">${r.name||ci.l}</div><div class="ls">${r.ref?'Réf : '+r.ref:''}${r.date?' · '+r.date.split('-').reverse().join('/'):''}</div></div><button class="del" onclick="delResa(${r.id})">✕</button></div>`;}).join(''); }
-
-function setTripBudget(){ const v=parseFloat(document.getElementById('trip-budget-total').value)||0;const t=currentTrip();if(!t)return;t.budget=v;save();renderTripBudget();toast('Budget : '+v+'€'); }
-function addTripDep(){ const n=document.getElementById('tdep-n').value.trim(),a=parseFloat(document.getElementById('tdep-a').value)||0;if(!n)return;const t=currentTrip();if(!t)return;if(!t.deps)t.deps=[];t.deps.push({id:Date.now(),name:n,amount:a});document.getElementById('tdep-n').value='';document.getElementById('tdep-a').value='';save();renderTripBudget(); }
-function delTripDep(id){ const t=currentTrip();if(!t)return;t.deps=(t.deps||[]).filter(x=>x.id!==id);save();renderTripBudget(); }
-function renderTripBudget(){ const bpct=document.getElementById('trip-bpct'),bleft=document.getElementById('trip-bleft'),bbar=document.getElementById('trip-bbar'),deps=document.getElementById('trip-deps');const t=currentTrip();if(!t){if(deps)deps.innerHTML='<div class="emp"><div class="ei">💸</div><div class="et">Aucune dépense</div></div>';return;}const spent=(t.deps||[]).reduce((s,d)=>s+d.amount,0),budget=t.budget||0,left=budget-spent,pct=budget?Math.min(100,(spent/budget)*100):0;if(bpct)bpct.textContent=pct.toFixed(0)+'%';if(bleft)bleft.textContent=budget?(left>=0?left.toFixed(2)+' € restant':Math.abs(left).toFixed(2)+' € dépassé'):'Budget non défini';if(bbar){bbar.style.width=pct+'%';bbar.style.background=pct>90?'linear-gradient(90deg,var(--red),#C05050)':'linear-gradient(90deg,var(--a),var(--ad))';}if(deps){if(!(t.deps||[]).length){deps.innerHTML='<div class="emp"><div class="ei">💸</div><div class="et">Aucune dépense</div></div>';}else{deps.innerHTML=t.deps.map(d=>`<div class="li"><div class="icb">💸</div><div class="lii"><div class="ln">${d.name}</div></div><div class="lv">${d.amount.toFixed(2)} €</div><button class="del" onclick="delTripDep(${d.id})">✕</button></div>`).join('');}}}
-
-const RATES={EUR:1,USD:1.08,GBP:0.86,JPY:162,MAD:10.8,CHF:0.97,CAD:1.47,AUD:1.66,TND:3.36};
-const SYMBOLS={EUR:'€',USD:'$',GBP:'£',JPY:'¥',MAD:'MAD',CHF:'CHF',CAD:'CA$',AUD:'A$',TND:'DT'};
-function convertCurrency(){ const amt=parseFloat(document.getElementById('conv-amt').value)||0;const from=document.getElementById('conv-from').value,to=document.getElementById('conv-to').value;const result=(amt/RATES[from])*RATES[to];document.getElementById('conv-result').textContent=`${amt} ${SYMBOLS[from]} = ${result.toFixed(2)} ${SYMBOLS[to]}`; }
+// ─── Stubs de compatibilité (anciennes fonctions de l'ancienne section voyage) ───
+// Évite les erreurs si du code legacy les appelle quelque part.
+function setTripDetailTab(){}
+function setBagTab(){}
+function renderBagContent(){}
+function addBagItem(){}
+function delBagItem(){}
+function toggleBagItem(){}
+function addItiDay(){}
+function delItiDay(){}
+function renderTripIti(){}
+function addResa(){}
+function delResa(){}
+function renderTripResa(){}
+function setTripBudget(){}
+function addTripDep(){}
+function delTripDep(){}
+function renderTripBudget(){}
+function convertCurrency(){}
 function setTripTab(){}
 
 // ════════════════════════════════════
@@ -3188,8 +3437,9 @@ function setRevTab(tab){
     if(el)el.style.display=t===tab?'block':'none';
     if(btn)btn.className='td-tab'+(t===tab?' active':'');
   });
-  if(tab==='add')refreshFicheSelects();
-  if(tab==='test')refreshTestSelects();
+  if(tab==='fiches') renderFiches();
+  if(tab==='add')    refreshFicheSelects();
+  if(tab==='test')   refreshTestSelects();
 }
 
 function getMatieres(){
@@ -3241,13 +3491,34 @@ function addFiche(){
   const r=document.getElementById('fiche-r').value.trim();
   if(!q||!r)return toast('Question et réponse requises 😊');
   if(!S.fiches)S.fiches=[];
-  S.fiches.push({id:Date.now(),mat,chap,q,r});
+  S.fiches.push({id:Date.now()+Math.floor(Math.random()*1000),mat,chap,q,r});
+  // Reset des champs
   document.getElementById('fiche-q').value='';
   document.getElementById('fiche-r').value='';
-  save();renderFiches();toast('Fiche ajoutée 📋');
+  if(matInp) matInp.value='';
+  if(chapInp) chapInp.value='';
+  save();
+  renderFiches();
+  toast('Fiche ajoutée 📋');
+  // Bascule auto vers l'onglet "Mes fiches" pour qu'on voie le résultat
+  setRevTab('fiches');
 }
 
-function delFiche(id){S.fiches=(S.fiches||[]).filter(x=>x.id!==id);save();renderFiches();}
+async function delFiche(id){
+  const fiche = (S.fiches||[]).find(x => x.id === id);
+  if(!fiche) return;
+  const ok = await askConfirm({
+    title: 'Supprimer cette fiche ?',
+    message: 'La fiche « ' + (fiche.q||'?').substring(0,60) + ' » sera supprimée définitivement.',
+    yesLabel: '🗑️ Supprimer',
+    noLabel: 'Annuler'
+  });
+  if(!ok) return;
+  S.fiches = (S.fiches||[]).filter(x => x.id !== id);
+  save();
+  renderFiches();
+  toast('Fiche supprimée');
+}
 
 function renderFiches(){
   const el=document.getElementById('fiches-list');if(!el)return;
