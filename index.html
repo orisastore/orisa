@@ -104,6 +104,7 @@ textarea.inp{resize:vertical;line-height:1.6}
 .btnr{background:#FFE8E8;color:var(--red)}
 .btnsm{padding:7px 13px;font-size:12px}
 .btnxs{padding:5px 10px;font-size:11px;border-radius:8px}
+.meal-type-btn.on{background:var(--ad);color:#fff;}
 .stat{background:#fff;border-radius:18px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center}
 .sv{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:4px}
 .sl{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:1px}
@@ -1195,19 +1196,6 @@ textarea.inp{resize:vertical;line-height:1.6}
 <div class="toast" id="toast"></div>
 
 <!-- STREAK MODAL -->
-<div id="streak-modal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.4);align-items:center;justify-content:center;padding:24px">
-  <div style="background:#fff;border-radius:26px;padding:32px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 12px 50px rgba(0,0,0,.2);animation:popIn .35s cubic-bezier(.34,1.56,.64,1)">
-    <div id="streak-emoji" style="font-size:56px;margin-bottom:12px">🌸</div>
-    <div id="streak-title" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Bonne journée !</div>
-    <div id="streak-days" style="display:inline-block;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border-radius:50px;padding:6px 18px;font-size:13px;font-weight:600;margin-bottom:14px"></div>
-    <div id="streak-msg" style="font-size:14px;color:var(--tl);line-height:1.7;margin-bottom:22px"></div>
-    <button onclick="closeStreakModal()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;touch-action:manipulation">C'est parti ! ✨</button>
-  </div>
-</div>
-<style>
-@keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-</style>
-
 <!-- SETTINGS PANEL -->
 <div class="stp" id="stp">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
@@ -1231,7 +1219,9 @@ textarea.inp{resize:vertical;line-height:1.6}
   <div class="ssect" id="scat-orga" style="display:none">
     <div class="ssect-t">Catégories Organisation</div>
     <div style="display:flex;flex-wrap:wrap;gap:7px">
-      <button class="otag on" id="ct-planning" onclick="toggleCat(this,'planning')">Planning</button>
+      <button class="otag on" id="ct-planning" onclick="toggleCat(this,'planning')">📅 Planning</button>
+      <button class="otag on" id="ct-heures" onclick="toggleCat(this,'heures')">⏱️ Heures effectuées</button>
+      <button class="otag on" id="ct-pomodoro" onclick="toggleCat(this,'pomodoro')">🍅 Pomodoro</button>
     </div>
   </div>
   <div class="ssect" id="scat-bien" style="display:none">
@@ -1258,8 +1248,7 @@ textarea.inp{resize:vertical;line-height:1.6}
     <div style="display:flex;flex-wrap:wrap;gap:7px">
       <button class="otag on" id="ct-voyage" onclick="toggleCat(this,'voyage')">✈️ Voyages</button>
       <button class="otag on" id="ct-monde" onclick="toggleCat(this,'monde')">🌍 Carte du monde</button>
-      <button class="otag on" id="ct-fiches" onclick="toggleCat(this,'fiches')">🃏 Fiches</button>
-      <button class="otag on" id="ct-pomodoro" onclick="toggleCat(this,'pomodoro')">🍅 Pomodoro</button>
+      <button class="otag on" id="ct-fiches" onclick="toggleCat(this,'fiches')">🃏 Fiches de révision</button>
     </div>
   </div>
   <div class="ssect" style="margin-top:8px;padding-top:16px;border-top:1px solid var(--al)">
@@ -1474,6 +1463,15 @@ async function load(){
         remote.fiches = Object.values(byId);
       }
 
+      // cycleDays, moodByMonth, hLogs, habitChecks : fusion locale prime
+      const objectKeys=['cycleDays','moodByMonth','hLogs','habitChecks','challengeDays'];
+      objectKeys.forEach(key=>{
+        const local=S[key];const rem=remote[key];
+        if(local&&rem&&typeof local==='object'&&!Array.isArray(local)){
+          remote[key]=Object.assign({},rem,local); // local prime sur remote
+        }
+      });
+
       Object.assign(S,remote);
       if(!Array.isArray(S.trips))  S.trips  = [];
       if(!Array.isArray(S.fiches)) S.fiches = [];
@@ -1620,7 +1618,6 @@ function initApp(){
   updateBudget();updateCalories();checkRdvs();buildNextEvent();buildDailyTip();updateDashStats();
   renderExp();renderRecur();
   initTodos();
-  setTimeout(checkStreak, 800); // léger délai pour que l'app charge d'abord
   buildSleepMonthSelect();buildSleepAnnual();
   initHLogMonthSelect();updateHGain();renderHLog();renderHStats();
   renderIngList();
@@ -2469,13 +2466,13 @@ function buildCycleCalendar(){
   for(let d=1;d<=days;d++){const key=`${now.getFullYear()}-${now.getMonth()}-${d}`,marked=S.cycleDays&&S.cycleDays[key],today=d===now.getDate();cells+=`<div class="cd ${marked?'filled':''} ${today?'today':''}" style="${marked?'background:#E88080;border-color:#E88080':''}" onclick="toggleCycleDay('${key}',this)">${marked?'🔴':d}</div>`;}
   document.getElementById('cycle-cal').innerHTML=cells;buildCycleYear();
 }
-function toggleCycleDay(key,el){if(!S.cycleDays)S.cycleDays={};S.cycleDays[key]=!S.cycleDays[key];if(S.cycleDays[key]){el.classList.add('filled');el.style.background='#E88080';el.style.borderColor='#E88080';el.innerHTML='🔴';}else{el.classList.remove('filled');el.style.background='';el.style.borderColor='';el.innerHTML=key.split('-')[2];}save();buildCycleYear();}
+async function toggleCycleDay(key,el){if(!S.cycleDays)S.cycleDays={};S.cycleDays[key]=!S.cycleDays[key];if(S.cycleDays[key]){el.classList.add('filled');el.style.background='#E88080';el.style.borderColor='#E88080';el.innerHTML='🔴';}else{el.classList.remove('filled');el.style.background='';el.style.borderColor='';el.innerHTML=key.split('-')[2];}await save();buildCycleYear();}
 function buildCycleYear(){
   const el=document.getElementById('cycle-year');if(!el)return;
   const now=new Date();
   el.innerHTML=MONTHS.map((m,mi)=>`<div style="margin-bottom:9px"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--tm);margin-bottom:4px">${m}</div><div style="display:flex;flex-wrap:wrap;gap:3px">${Array.from({length:new Date(now.getFullYear(),mi+1,0).getDate()},(_,i)=>{const d=i+1,key=`${now.getFullYear()}-${mi}-${d}`,marked=S.cycleDays&&S.cycleDays[key];return `<div onclick="toggleAnnDay('${key}',this)" style="width:18px;height:18px;border-radius:50%;background:${marked?'#E88080':'var(--al)'};display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer">${marked?'●':''}</div>`;}).join('')}</div></div>`).join('');
 }
-function toggleAnnDay(key,el){if(!S.cycleDays)S.cycleDays={};S.cycleDays[key]=!S.cycleDays[key];el.style.background=S.cycleDays[key]?'#E88080':'var(--al)';el.innerHTML=S.cycleDays[key]?'●':'';save();buildCycleCalendar();}
+async function toggleAnnDay(key,el){if(!S.cycleDays)S.cycleDays={};S.cycleDays[key]=!S.cycleDays[key];el.style.background=S.cycleDays[key]?'#E88080':'var(--al)';el.innerHTML=S.cycleDays[key]?'●':'';await save();buildCycleCalendar();}
 
 // ════════════════════════════════════
 // REPAS
@@ -3702,92 +3699,6 @@ window.addEventListener('load',()=>{const isIOS=/iphone|ipad|ipod/i.test(navigat
 // ════════════════════════════════════
 // STREAK — récompense quotidienne
 // ════════════════════════════════════
-const STREAK_MESSAGES = [
-  "Chaque jour est une nouvelle chance de devenir qui tu veux être. 🌱",
-  "Tu es plus forte que tu ne le crois. Prouve-le aujourd'hui. 💪",
-  "Le progrès, pas la perfection. Un pas à la fois. 👣",
-  "Ta constance est ta plus grande force. Continue ! ✨",
-  "Aujourd'hui est exactement le bon moment pour commencer. 🌅",
-  "Tu brilles même les jours où tu ne t'en rends pas compte. 🌟",
-  "Prends soin de toi comme tu prendrais soin de quelqu'un que tu aimes. 🌸",
-  "La discipline aujourd'hui, la fierté demain. 🏆",
-  "Chaque petit effort compte. Tu es sur la bonne voie. 🛤️",
-  "Courage pour ce nouveau jour — il t'appartient entièrement. ☀️",
-];
-
-const STREAK_MILESTONES = {
-  1:  { emoji:'🌸', title:'Première connexion !' },
-  2:  { emoji:'✌️', title:'2 jours de suite !' },
-  3:  { emoji:'🔥', title:'3 jours consécutifs !' },
-  5:  { emoji:'⭐', title:'5 jours consécutifs !' },
-  7:  { emoji:'🏆', title:'1 semaine complète !' },
-  14: { emoji:'💎', title:'2 semaines sans faille !' },
-  21: { emoji:'👑', title:'21 jours — une habitude est née !' },
-  30: { emoji:'🚀', title:'30 jours — tu es incroyable !' },
-};
-
-function getWeekKey(date){
-  const d=new Date(date);
-  const day=d.getDay()||7; // lundi=1, dimanche=7
-  d.setDate(d.getDate()-day+1); // ramener au lundi
-  return `${d.getFullYear()}-W${String(Math.ceil(d.getDate()/7)).padStart(2,'0')}-${d.getMonth()}`;
-}
-
-function checkStreak(){
-  const todayStr=new Date().toISOString().split('T')[0];
-  const lastVisit=localStorage.getItem('orisa_last_visit');
-  const lastVisitWeek=lastVisit?getWeekKey(new Date(lastVisit)):null;
-  const todayWeek=getWeekKey(new Date());
-
-  // Déjà vu aujourd'hui → pas de popup
-  if(lastVisit===todayStr) return;
-
-  let streak=parseInt(localStorage.getItem('orisa_streak')||'0');
-
-  // Nouvelle semaine → reset du streak
-  if(lastVisitWeek&&lastVisitWeek!==todayWeek){
-    streak=0;
-  }
-
-  // Vérifier si hier était le dernier jour (consécutif)
-  if(lastVisit){
-    const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
-    const yesterdayStr=yesterday.toISOString().split('T')[0];
-    if(lastVisit===yesterdayStr){
-      streak++; // jour consécutif
-    } else if(lastVisit!==todayStr){
-      streak=1; // rupture de streak
-    }
-  } else {
-    streak=1; // première visite
-  }
-
-  localStorage.setItem('orisa_streak', String(streak));
-  localStorage.setItem('orisa_last_visit', todayStr);
-
-  // Afficher la modale
-  showStreakModal(streak);
-}
-
-function showStreakModal(streak){
-  const milestone=Object.entries(STREAK_MILESTONES)
-    .reverse()
-    .find(([days])=>streak>=parseInt(days));
-  const {emoji, title}=milestone?milestone[1]:{emoji:'🌸',title:'Bonne journée !'};
-  const msg=STREAK_MESSAGES[Math.floor(Math.random()*STREAK_MESSAGES.length)];
-
-  document.getElementById('streak-emoji').textContent=emoji;
-  document.getElementById('streak-title').textContent=title;
-  document.getElementById('streak-days').textContent=
-    streak===1?'Jour 1':streak+' jours consécutifs 🔥';
-  document.getElementById('streak-msg').textContent=msg;
-  document.getElementById('streak-modal').style.display='flex';
-}
-
-function closeStreakModal(){
-  document.getElementById('streak-modal').style.display='none';
-}
-
 // ════════════════════════════════════
 // ACCÈS PAR CODE
 // ════════════════════════════════════
@@ -3866,6 +3777,11 @@ function closeLegal(){
 function startTrial(){
   const cgv=document.getElementById('cgv-check');
   if(!cgv||!cgv.checked){showAccessError('Tu dois accepter les CGV pour commencer l\'essai 😊');return;}
+  // Bloquer si l'essai a déjà été utilisé
+  if(localStorage.getItem('orisa_trial_used')){
+    showAccessError('Ton essai gratuit de 7 jours est terminé. Entre ton code d\'accès pour continuer 😊');
+    return;
+  }
   const trialStart=new Date().toISOString().split('T')[0];
   localStorage.setItem('orisa_trial_start', trialStart);
   localStorage.setItem('orisa_access','trial');
@@ -3890,8 +3806,9 @@ function checkTrialExpiry(){
   const now=new Date();
   const days=Math.floor((now-start)/(1000*60*60*24));
   if(days>=7){
-    // Essai expiré
+    // Essai expiré — marquer comme utilisé pour empêcher tout renouvellement
     localStorage.removeItem('orisa_access');
+    localStorage.setItem('orisa_trial_used','1');
     return true;
   }
   // Afficher les jours restants dans un toast discret
