@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Orisa">
 <link rel="manifest" href="data:application/json,{%22name%22:%22Orisa%22,%22short_name%22:%22Orisa%22,%22start_url%22:%22./%22,%22display%22:%22standalone%22,%22background_color%22:%22%23FDF8F2%22,%22theme_color%22:%22%23F2A7B8%22,%22icons%22:[{%22src%22:%22https://placehold.co/192x192/F2A7B8/FFFFFF?text=O%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22},{%22src%22:%22https://placehold.co/512x512/F2A7B8/FFFFFF?text=O%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -18,7 +18,7 @@
   --green:#7BC47F;--red:#E88080;
   --sw:268px;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
 
 /* ── INTRO ── */
 #intro{position:fixed;inset:0;z-index:1000;background:#fff;display:flex;flex-direction:column;align-items:stretch}
@@ -30,7 +30,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 /* ── ONBOARDING ── */
 #ob{position:fixed;inset:0;z-index:999;background:linear-gradient(135deg,var(--cream),var(--al),var(--gp));display:none;align-items:center;justify-content:center;padding:20px}
 .obc{background:#fff;border-radius:28px;padding:36px 28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.1);text-align:center}
-.obl{font-family:'Playfair Display',serif;font-size:30px;color:var(--text);margin-bottom:2px}
+.obl{font-family:'Poppins',sans-serif;font-size:30px;color:var(--text);margin-bottom:2px}
 .obl em{color:var(--ad);font-style:italic}
 .obs{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tm);margin-bottom:24px}
 .odots{display:flex;justify-content:center;gap:6px;margin-bottom:20px}
@@ -38,16 +38,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .odot.on{background:var(--ad)}
 .ostep{display:none}
 .ostep.on{display:block}
-.oh{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px}
+.oh{font-family:'Poppins',sans-serif;font-size:20px;margin-bottom:6px}
 .op{font-size:13px;color:var(--tl);margin-bottom:18px;line-height:1.6}
-.onxt{width:100%;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:.2s;margin-top:4px}
+.onxt{width:100%;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:.2s;margin-top:4px}
 .onxt:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
-.oinp{width:100%;padding:12px 16px;border:1.5px solid var(--al);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;margin-bottom:14px}
+.oinp{width:100%;padding:12px 16px;border:1.5px solid var(--al);border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;margin-bottom:14px}
 .oinp:focus{border-color:var(--a)}
 .ogrid{display:grid;gap:10px;margin-bottom:16px}
 .ogrid.c2{grid-template-columns:1fr 1fr}
 .ogrid.c3{grid-template-columns:1fr 1fr 1fr}
-.ocard{background:#fff;border:2px solid var(--al);border-radius:14px;padding:14px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:5px;transition:.15s}
+.ocard{background:#fff;border:2px solid var(--al);border-radius:14px;padding:14px 10px;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;flex-direction:column;align-items:center;gap:5px;transition:.15s}
 .ocard:hover{border-color:var(--a)}
 .ocard.on{border-color:var(--ad);background:var(--al)}
 .ocard .oi{font-size:24px}
@@ -56,7 +56,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .coloropt{width:50px;height:50px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.2s;position:relative}
 .coloropt.on{border-color:var(--text);transform:scale(1.1)}
 .coloropt.on::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
-.otag{padding:7px 14px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'DM Sans',sans-serif;transition:.15s;color:var(--text)}
+.otag{padding:7px 14px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'Poppins',sans-serif;transition:.15s;color:var(--text)}
 .otag:hover{border-color:var(--a)}
 .otag.on{background:var(--al);border-color:var(--ad);font-weight:500}
 
@@ -67,7 +67,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 @media(min-width:900px){.sb{transform:translateX(0)!important}.main{margin-left:var(--sw)!important}.hbg{display:none!important}.sbo{display:none!important}}
 .sbo{display:none;position:fixed;inset:0;z-index:98}
 .sbo.on{display:block}
-.slogo{font-family:'Playfair Display',serif;font-size:24px;padding:0 8px;margin-bottom:2px}
+.slogo{font-family:'Poppins',sans-serif;font-size:24px;padding:0 8px;margin-bottom:2px}
 .slogo em{color:var(--ad);font-style:italic}
 .ssub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tm);padding:0 8px;margin-bottom:22px}
 .ssec{margin-bottom:16px}
@@ -86,17 +86,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .pg.on{display:block;animation:fi .3s ease}
 @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .plbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
-.ptit{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:4px}
+.ptit{font-family:'Poppins',sans-serif;font-size:28px;margin-bottom:4px}
 .pdsc{font-size:13px;color:var(--tl);margin-bottom:22px}
 .card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:16px}
-.ctit{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:14px}
+.ctit{font-family:'Poppins',sans-serif;font-size:17px;margin-bottom:14px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.inp{padding:11px 15px;border:1.5px solid var(--al);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:.2s;width:100%}
+.inp{padding:11px 15px;border:1.5px solid var(--al);border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:.2s;width:100%}
 .inp:focus{border-color:var(--a)}
 textarea.inp{resize:vertical;line-height:1.6}
 .row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:flex-end}
-.btn{padding:11px 18px;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:.2s;white-space:nowrap}
+.btn{padding:11px 18px;border:none;border-radius:12px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:.2s;white-space:nowrap}
 .btnp{background:linear-gradient(135deg,var(--ad),var(--a));color:#fff}
 .btnp:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(0,0,0,.15)}
 .btng{background:linear-gradient(135deg,var(--gold),#E8C060);color:#fff}
@@ -106,7 +106,7 @@ textarea.inp{resize:vertical;line-height:1.6}
 .btnxs{padding:5px 10px;font-size:11px;border-radius:8px}
 .meal-type-btn.on{background:var(--ad);color:#fff;}
 .stat{background:#fff;border-radius:18px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center}
-.sv{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:4px}
+.sv{font-family:'Poppins',sans-serif;font-size:28px;margin-bottom:4px}
 .sl{font-size:11px;color:var(--tm);text-transform:uppercase;letter-spacing:1px}
 .pw{margin-bottom:10px}
 .pt{display:flex;justify-content:space-between;font-size:12px;color:var(--tl);margin-bottom:5px}
@@ -132,7 +132,7 @@ textarea.inp{resize:vertical;line-height:1.6}
 .cd.today{border-color:var(--gold);font-weight:600;color:var(--text)}
 .cd.filled{color:#fff;font-weight:500}
 .cd.empty{background:transparent;cursor:default;pointer-events:none}
-.mdb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 12px;border:2px solid var(--al);border-radius:14px;cursor:pointer;background:#fff;font-family:'DM Sans',sans-serif;transition:.15s}
+.mdb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 12px;border:2px solid var(--al);border-radius:14px;cursor:pointer;background:#fff;font-family:'Poppins',sans-serif;transition:.15s}
 .mdb:hover,.mdb.on{transform:scale(1.05)}
 .mdb .me{font-size:22px}
 .mdb .ml{font-size:11px;color:var(--tl)}
@@ -141,7 +141,7 @@ textarea.inp{resize:vertical;line-height:1.6}
 .hd{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--al);cursor:pointer;background:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;transition:.15s}
 .hd.done{background:var(--green);border-color:var(--green);color:#fff}
 .slh{background:linear-gradient(135deg,#1A1035,#3D2070);border-radius:20px;padding:28px;color:#fff;text-align:center;margin-bottom:16px}
-.slb{font-family:'Playfair Display',serif;font-size:56px;font-weight:600;line-height:1;margin:8px 0 4px}
+.slb{font-family:'Poppins',sans-serif;font-size:56px;font-weight:600;line-height:1;margin:8px 0 4px}
 .wg{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;overflow-x:auto}
 .md{background:#fff;border-radius:14px;padding:10px 6px;text-align:center;min-height:88px;box-shadow:0 2px 8px rgba(0,0,0,.05);min-width:76px}
 .mdn{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--tm);margin-bottom:6px}
@@ -149,13 +149,13 @@ textarea.inp{resize:vertical;line-height:1.6}
 .ms:hover{background:var(--a);color:#fff}
 .ms.filled{background:linear-gradient(135deg,var(--al),var(--gp));color:var(--text)}
 .ch{background:linear-gradient(135deg,#1A1A2E,#3D2B5C);border-radius:20px;padding:28px;color:#fff;text-align:center;margin-bottom:16px}
-.chn{font-family:'Playfair Display',serif;font-size:68px;font-weight:600;line-height:1;margin-bottom:4px}
+.chn{font-family:'Poppins',sans-serif;font-size:68px;font-weight:600;line-height:1;margin-bottom:4px}
 .cdu{display:flex;gap:10px;justify-content:center;margin:14px 0}
 .cdu .u{background:#fff;border-radius:14px;padding:16px 12px;text-align:center;min-width:60px;box-shadow:0 4px 12px rgba(0,0,0,.07)}
-.cdu .n{font-family:'Playfair Display',serif;font-size:30px;line-height:1;margin-bottom:3px}
+.cdu .n{font-family:'Poppins',sans-serif;font-size:30px;line-height:1;margin-bottom:3px}
 .cdu .l{font-size:10px;color:var(--tm);letter-spacing:1px;text-transform:uppercase}
-.td{font-family:'Playfair Display',serif;font-size:60px;text-align:center;color:var(--text);margin:12px 0;letter-spacing:2px}
-.rf{padding:7px 14px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'DM Sans',sans-serif;transition:.15s;color:var(--text)}
+.td{font-family:'Poppins',sans-serif;font-size:60px;text-align:center;color:var(--text);margin:12px 0;letter-spacing:2px}
+.rf{padding:7px 14px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'Poppins',sans-serif;transition:.15s;color:var(--text)}
 .rf:hover,.rf.on{background:var(--al);border-color:var(--ad)}
 .rcg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .rc{background:var(--cream);border-radius:14px;padding:14px;cursor:pointer;border:2px solid transparent;transition:.15s}
@@ -165,10 +165,10 @@ textarea.inp{resize:vertical;line-height:1.6}
 .mbg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:500;display:none;align-items:flex-end;justify-content:center}
 .mbg.on{display:flex}
 .modal{background:#fff;border-radius:28px 28px 0 0;padding:26px 22px;width:100%;max-height:88vh;overflow-y:auto}
-.mtit{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px}
+.mtit{font-family:'Poppins',sans-serif;font-size:20px;margin-bottom:16px}
 .stp{position:fixed;top:0;right:0;bottom:0;width:290px;background:#fff;z-index:400;padding:24px 20px;box-shadow:-4px 0 20px rgba(0,0,0,.1);transform:translateX(100%);transition:.3s;overflow-y:auto}
 .stp.on{transform:translateX(0)}
-.stit{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:20px}
+.stit{font-family:'Poppins',sans-serif;font-size:20px;margin-bottom:20px}
 .ssect{margin-bottom:18px}
 .ssect-t{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tm);margin-bottom:8px}
 .trow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--al)}
@@ -180,22 +180,22 @@ textarea.inp{resize:vertical;line-height:1.6}
 .tsw.on::after{left:21px}
 .ib{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:#fff;border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:8000;transition:.4s cubic-bezier(.34,1.56,.64,1);min-width:280px;max-width:340px;border:1.5px solid var(--al)}
 .ib.on{transform:translateX(-50%) translateY(0)}
-.iico{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--ad));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;color:#fff;font-weight:600;flex-shrink:0}
+.iico{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--ad));display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:18px;color:#fff;font-weight:600;flex-shrink:0}
 .ibt{flex:1}
 .ibt .it{font-size:13px;font-weight:600;margin-bottom:2px}
 .ibt .is{font-size:11px;color:var(--tm)}
-.ibb{background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:9px;padding:8px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.ibb{background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:9px;padding:8px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;white-space:nowrap}
 .ibx{background:none;border:none;cursor:pointer;color:var(--tm);font-size:16px;padding:4px;flex-shrink:0}
 .rdvr{background:linear-gradient(135deg,var(--al),var(--gp));border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer}
 .rdvr .ri{font-size:22px}
 .rdvr .rt{font-size:13px;font-weight:500}
 .rdvr .rs{font-size:12px;color:var(--tl)}
-.int-btn{padding:6px 12px;border-radius:50px;border:1.5px solid var(--al);font-size:12px;cursor:pointer;background:#fff;font-family:'DM Sans',sans-serif;transition:.15s}
+.int-btn{padding:6px 12px;border-radius:50px;border:1.5px solid var(--al);font-size:12px;cursor:pointer;background:#fff;font-family:'Poppins',sans-serif;transition:.15s}
 .int-btn.on{font-weight:600}
 /* ── VOYAGE DETAIL ── */
-.td-tab{padding:9px 16px;border:none;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--al);color:var(--tl);white-space:nowrap;transition:.15s;touch-action:manipulation;flex-shrink:0}
+.td-tab{padding:9px 16px;border:none;border-radius:50px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;cursor:pointer;background:var(--al);color:var(--tl);white-space:nowrap;transition:.15s;touch-action:manipulation;flex-shrink:0}
 .td-tab.active{background:var(--ad);color:#fff}
-.bag-tab{padding:7px 14px;border:none;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;background:#f0f0f0;color:var(--tl);white-space:nowrap;transition:.15s;touch-action:manipulation;flex-shrink:0}
+.bag-tab{padding:7px 14px;border:none;border-radius:50px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;cursor:pointer;background:#f0f0f0;color:var(--tl);white-space:nowrap;transition:.15s;touch-action:manipulation;flex-shrink:0}
 .bag-tab.active{background:var(--text);color:#fff}
 .trip-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:12px;cursor:pointer;transition:.15s;border:2px solid transparent}
 .trip-card:active{border-color:var(--al)}
@@ -233,12 +233,12 @@ textarea.inp{resize:vertical;line-height:1.6}
   <div style="flex:1;position:relative">
     <div class="isl on" id="isl1">
       <div style="font-size:68px;margin-bottom:20px">🌸</div>
-      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--text);margin-bottom:14px">Bienvenue sur Orisa</div>
+      <div style="font-family:'Poppins',sans-serif;font-size:28px;font-weight:600;color:var(--text);margin-bottom:14px">Bienvenue sur Orisa</div>
       <div style="font-size:15px;color:var(--tl);line-height:1.8;max-width:290px">Ton application personnelle pour organiser ta vie au quotidien — budget, bien-être, objectifs, cuisine et bien plus.</div>
     </div>
     <div class="isl" id="isl2">
       <div style="font-size:40px;margin-bottom:18px">💰 🌿 📅 🍽️</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:18px">Tout en un seul endroit</div>
+      <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:18px">Tout en un seul endroit</div>
       <div style="display:flex;flex-direction:column;gap:9px;width:100%;max-width:310px;text-align:left">
         <div style="background:#FAE0E7;border-radius:13px;padding:11px 15px;font-size:13px">💰 <b>Budget</b> — Suis tes dépenses et économise</div>
         <div style="background:#E8F5E9;border-radius:13px;padding:11px 15px;font-size:13px">🌿 <b>Bien-être</b> — Humeur, sommeil, objectifs</div>
@@ -248,7 +248,7 @@ textarea.inp{resize:vertical;line-height:1.6}
     </div>
     <div class="isl" id="isl3">
       <div style="font-size:52px;margin-bottom:14px">📱</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Ajoute Orisa à ton écran</div>
+      <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Ajoute Orisa à ton écran</div>
       <div style="font-size:13px;color:var(--tl);margin-bottom:18px">Pour y accéder comme une vraie app</div>
       <div style="width:100%;max-width:310px">
         <div style="background:#F8F9FA;border-radius:13px;padding:15px;margin-bottom:10px;text-align:left">
@@ -268,7 +268,7 @@ textarea.inp{resize:vertical;line-height:1.6}
     <div class="idot" id="id3"></div>
   </div>
   <div style="padding:14px 28px 36px">
-    <button id="ibtn" onclick="nextIntro()" style="width:100%;padding:16px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;cursor:pointer">Continuer →</button>
+    <button id="ibtn" onclick="nextIntro()" style="width:100%;padding:16px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:16px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:500;cursor:pointer">Continuer →</button>
   </div>
 </div>
 
@@ -391,7 +391,7 @@ textarea.inp{resize:vertical;line-height:1.6}
     <div class="pg on" id="pg-home">
       <div id="home-hero" style="border-radius:22px;padding:26px 22px;margin-bottom:18px;position:relative;overflow:hidden;min-height:130px;background:linear-gradient(135deg,var(--al),var(--gp))">
         <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ad);margin-bottom:5px" id="h-tlbl">MATIN</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:3px" id="h-greet">Bonjour 🌸</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:3px" id="h-greet">Bonjour 🌸</div>
         <div style="font-size:12px;color:var(--tl)" id="h-date"></div>
         <div id="h-weather" style="margin-top:12px"></div>
       </div>
@@ -417,7 +417,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       </div>
       <div id="dailytip"></div>
       <div class="card" style="background:linear-gradient(135deg,var(--al),var(--gp))">
-        <div id="h-quote" style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;text-align:center;padding:6px 0;line-height:1.6"></div>
+        <div id="h-quote" style="font-family:'Poppins',sans-serif;font-size:15px;font-style:italic;text-align:center;padding:6px 0;line-height:1.6"></div>
       </div>
       <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="openSettings()">
         <div><div style="font-size:14px;font-weight:500">⚙️ Personnaliser</div><div style="font-size:12px;color:var(--tm);margin-top:2px">Masquer/afficher les sections</div></div>
@@ -550,7 +550,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       <!-- Total du mois -->
       <div style="background:linear-gradient(135deg,#1B4332,#2D6A4F);border-radius:22px;padding:28px;text-align:center;margin-bottom:16px;color:#fff">
         <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.7;margin-bottom:8px">Gagné ce mois</div>
-        <div style="font-family:'Playfair Display',serif;font-size:58px;font-weight:600;line-height:1;margin-bottom:6px" id="h-gain-now">0 €</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:58px;font-weight:600;line-height:1;margin-bottom:6px" id="h-gain-now">0 €</div>
         <div style="font-size:13px;opacity:.7" id="h-gain-status">Configure ton taux horaire pour commencer</div>
         <div style="margin-top:12px;display:flex;justify-content:center;gap:24px">
           <div><div style="font-size:20px;font-weight:600" id="h-total-hours">0h</div><div style="font-size:11px;opacity:.6">heures ce mois</div></div>
@@ -579,10 +579,10 @@ textarea.inp{resize:vertical;line-height:1.6}
           </div>
           <div id="h-calcul-result" style="display:none;background:var(--cream);border-radius:12px;padding:14px;margin-bottom:10px">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par heure</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--green)" id="h-calc-heure">—</div></div>
-              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par jour</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold)" id="h-calc-jour">—</div></div>
-              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par semaine</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--ad)" id="h-calc-sem">—</div></div>
-              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par mois</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#7B2D8B" id="h-calc-mois">—</div></div>
+              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par heure</div><div style="font-family:'Poppins',sans-serif;font-size:20px;color:var(--green)" id="h-calc-heure">—</div></div>
+              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par jour</div><div style="font-family:'Poppins',sans-serif;font-size:20px;color:var(--gold)" id="h-calc-jour">—</div></div>
+              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par semaine</div><div style="font-family:'Poppins',sans-serif;font-size:20px;color:var(--ad)" id="h-calc-sem">—</div></div>
+              <div style="text-align:center"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Par mois</div><div style="font-family:'Poppins',sans-serif;font-size:20px;color:#7B2D8B" id="h-calc-mois">—</div></div>
             </div>
             <button class="btn btnp" style="width:100%;margin-top:12px" onclick="applyCalcRate()">Utiliser ce taux ✓</button>
           </div>
@@ -760,7 +760,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       <div class="plbl">✦ Bien-être</div><div class="ptit">Gratitude</div><div class="pdsc">Cultive le positif 💛</div>
       <div class="card" style="background:linear-gradient(135deg,var(--gp),var(--al));text-align:center;padding:32px">
         <div style="font-size:28px;margin-bottom:12px">🌟</div>
-        <div id="gr-quote" style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;line-height:1.5"></div>
+        <div id="gr-quote" style="font-family:'Poppins',sans-serif;font-size:17px;font-style:italic;line-height:1.5"></div>
       </div>
       <div class="card">
         <div class="ctit">Ce qui m'a rendu heureux·se</div>
@@ -949,7 +949,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       <!-- Hero compteur -->
       <div style="background:linear-gradient(135deg,#1A1A2E,#16213E);border-radius:22px;padding:26px;text-align:center;margin-bottom:16px;color:#fff">
         <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:8px">Exploration du monde</div>
-        <div style="font-family:'Playfair Display',serif;font-size:52px;font-weight:600;line-height:1;margin-bottom:4px" id="countries-pct-big">0%</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:52px;font-weight:600;line-height:1;margin-bottom:4px" id="countries-pct-big">0%</div>
         <div style="font-size:14px;opacity:.7;margin-bottom:16px"><span id="countries-count">0</span> pays sur 195</div>
         <div style="background:rgba(255,255,255,.15);border-radius:50px;height:8px;overflow:hidden">
           <div id="countries-bar" style="height:100%;border-radius:50px;background:linear-gradient(90deg,var(--a),var(--ad));transition:width .5s;width:0%"></div>
@@ -1028,7 +1028,7 @@ textarea.inp{resize:vertical;line-height:1.6}
         <div class="card" style="text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--al)" id="test-card-zone" onclick="flipCard()">
           <div style="font-size:11px;color:var(--ad);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px" id="test-mat-lbl"></div>
           <div style="font-size:12px;color:var(--tm);margin-bottom:6px" id="test-chap-lbl"></div>
-          <div style="font-family:'Playfair Display',serif;font-size:19px;line-height:1.5;padding:0 8px" id="test-text">Lance un test pour commencer</div>
+          <div style="font-family:'Poppins',sans-serif;font-size:19px;line-height:1.5;padding:0 8px" id="test-text">Lance un test pour commencer</div>
           <div style="font-size:12px;color:var(--tm);margin-top:10px" id="test-hint"></div>
         </div>
         <div style="display:flex;gap:8px;margin-top:10px">
@@ -1043,7 +1043,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       <div class="plbl">✦ Révisions</div><div class="ptit">Pomodoro</div><div class="pdsc">Travaille en sessions focalisées 🍅</div>
       <div class="card" style="text-align:center">
         <div style="font-size:13px;color:var(--tm);margin-bottom:8px" id="pomo-phase">Prêt à travailler</div>
-        <div style="font-family:'Playfair Display',serif;font-size:72px;font-weight:600;line-height:1;margin-bottom:12px" id="pomo-display">25:00</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:72px;font-weight:600;line-height:1;margin-bottom:12px" id="pomo-display">25:00</div>
         <div style="width:100%;margin-bottom:16px"><div class="pb"><div class="pf" id="pomo-bar" style="width:0%;background:linear-gradient(90deg,#E88080,#C05050)"></div></div></div>
         <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px">
           <button class="btn btnp" onclick="startPomo()">▶ Démarrer</button>
@@ -1161,9 +1161,9 @@ textarea.inp{resize:vertical;line-height:1.6}
 <div id="access-screen" style="display:none;position:fixed;inset:0;z-index:998;background:linear-gradient(160deg,#FFF5F8,#fff);align-items:center;justify-content:center;padding:28px;overflow-y:auto">
   <div style="background:#fff;border-radius:24px;padding:32px 24px;max-width:380px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.1);text-align:center">
     <div style="font-size:48px;margin-bottom:12px">🔑</div>
-    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Code d'accès</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Code d'accès</div>
     <div style="font-size:13px;color:var(--tl);margin-bottom:24px;line-height:1.6">Nouvelle sur Orisa ? Tu as <b>7 jours d'essai gratuit</b> — clique sur "Commencer l'essai" ci-dessous.<br><br>Tu as déjà un code ? Entre-le pour activer ton accès permanent.</div>
-    <button onclick="startTrial()" style="width:100%;padding:13px;background:var(--cream);color:var(--text);border:2px solid var(--al);border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;touch-action:manipulation;margin-bottom:16px">🎁 Commencer l'essai gratuit (7 jours)</button>
+    <button onclick="startTrial()" style="width:100%;padding:13px;background:var(--cream);color:var(--text);border:2px solid var(--al);border-radius:14px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;touch-action:manipulation;margin-bottom:16px">🎁 Commencer l'essai gratuit (7 jours)</button>
     <div style="font-size:12px;color:var(--tm);margin-bottom:12px;text-align:center">— ou —</div>
     <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;text-align:left">J'ai déjà un code :</div>
     <input id="access-code-inp" class="inp" placeholder="Ex: ORISA-X7K2-9P4M" autocomplete="off" autocapitalize="characters" spellcheck="false" style="text-align:center;font-size:16px;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase">
@@ -1173,7 +1173,7 @@ textarea.inp{resize:vertical;line-height:1.6}
       <span style="font-size:12px;color:var(--tl);line-height:1.6">J'ai lu et j'accepte les <span onclick="openLegal('cgv')" style="color:var(--ad);text-decoration:underline;cursor:pointer">Conditions Générales de Vente</span> et la <span onclick="openLegal('privacy')" style="color:var(--ad);text-decoration:underline;cursor:pointer">Politique de confidentialité</span> d'Orisa.</span>
     </label>
     <div id="access-error" style="display:none;color:#E74C3C;font-size:13px;margin-bottom:10px"></div>
-    <button id="access-btn" onclick="checkAccessCode()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;touch-action:manipulation;-webkit-appearance:none">Activer mon accès ✨</button>
+    <button id="access-btn" onclick="checkAccessCode()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;cursor:pointer;touch-action:manipulation;-webkit-appearance:none">Activer mon accès ✨</button>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--al)">
       <div style="font-size:12px;color:var(--tm);margin-bottom:10px">Pas encore de code ?</div>
       <div style="display:flex;gap:8px">
@@ -1183,12 +1183,29 @@ textarea.inp{resize:vertical;line-height:1.6}
   </div>
 </div>
 
+<!-- MODAL ÉDITION FICHE -->
+<div id="edit-fiche-modal" class="mbg" style="display:none">
+  <div class="mbox">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="ctit" style="margin:0">✏️ Modifier la fiche</div>
+      <button onclick="document.getElementById('edit-fiche-modal').style.display='none'" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--tm)">✕</button>
+    </div>
+    <div style="font-size:12px;color:var(--tm);margin-bottom:5px">Chapitre</div>
+    <input class="inp" id="edit-fiche-chap" placeholder="Chapitre (optionnel)" style="margin-bottom:10px">
+    <div style="font-size:12px;color:var(--tm);margin-bottom:5px">Question</div>
+    <input class="inp" id="edit-fiche-q" placeholder="Question..." style="margin-bottom:10px">
+    <div style="font-size:12px;color:var(--tm);margin-bottom:5px">Réponse</div>
+    <textarea class="inp" id="edit-fiche-r" placeholder="Réponse..." style="min-height:80px;margin-bottom:14px"></textarea>
+    <button class="btn btnp" style="width:100%" onclick="saveEditFiche()">Enregistrer ✓</button>
+  </div>
+</div>
+
 <!-- MODAL LÉGAL -->
 <div id="legal-modal" style="display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.5);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto">
   <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:480px;width:100%;margin:auto;position:relative">
     <button onclick="closeLegal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--tm)">✕</button>
     <div id="legal-content" style="font-size:13px;color:var(--text);line-height:1.8"></div>
-    <button onclick="closeLegal()" style="width:100%;margin-top:20px;padding:13px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer">J'ai lu ✓</button>
+    <button onclick="closeLegal()" style="width:100%;margin-top:20px;padding:13px;background:linear-gradient(135deg,var(--ad),var(--a));color:#fff;border:none;border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer">J'ai lu ✓</button>
   </div>
 </div>
 
@@ -1771,8 +1788,8 @@ async function fetchWeather(){
       <div style="font-size:13px;font-weight:600;margin-bottom:6px">🌤️ Météo locale</div>
       <div style="font-size:12px;color:var(--tl);margin-bottom:10px">Autoriser l'accès à ta position ?</div>
       <div style="display:flex;gap:8px">
-        <button onclick="allowGeo()" style="flex:1;padding:8px;background:var(--ad);color:#fff;border:none;border-radius:10px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;touch-action:manipulation">✅ Autoriser</button>
-        <button onclick="denyGeo()" style="flex:1;padding:8px;background:rgba(0,0,0,.08);color:var(--text);border:none;border-radius:10px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;touch-action:manipulation">❌ Refuser</button>
+        <button onclick="allowGeo()" style="flex:1;padding:8px;background:var(--ad);color:#fff;border:none;border-radius:10px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;touch-action:manipulation">✅ Autoriser</button>
+        <button onclick="denyGeo()" style="flex:1;padding:8px;background:rgba(0,0,0,.08);color:var(--text);border:none;border-radius:10px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif;touch-action:manipulation">❌ Refuser</button>
       </div>
     </div>`;
     return;
@@ -1788,7 +1805,7 @@ async function fetchWeather(){
     const code=data.current_weather.weathercode;
     const em=code<=1?'☀️':code<=3?'⛅':code<=48?'🌫️':code<=67?'🌧️':code<=77?'❄️':code<=82?'🌦️':'⛈️';
     const desc=code<=1?'Ensoleillé':code<=3?'Nuageux':code<=48?'Brumeux':code<=67?'Pluvieux':code<=77?'Neigeux':code<=82?'Averses':'Orageux';
-    const html=`<div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.4);border-radius:13px;padding:9px 15px"><div style="font-size:24px">${em}</div><div><div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--text)">${temp}°</div><div style="font-size:11px;color:var(--tl)">${desc}</div></div></div>`;
+    const html=`<div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.4);border-radius:13px;padding:9px 15px"><div style="font-size:24px">${em}</div><div><div style="font-family:'Poppins',sans-serif;font-size:19px;font-weight:600;color:var(--text)">${temp}°</div><div style="font-size:11px;color:var(--tl)">${desc}</div></div></div>`;
     el.innerHTML=html;S.weatherCache=html;S.weatherTime=now;save();
   }catch(e){
     el.innerHTML=`<div style="font-size:11px;color:var(--tl);background:rgba(255,255,255,.4);border-radius:10px;padding:7px 12px;display:inline-block">🌡️ Position indisponible</div>`;
@@ -2385,7 +2402,7 @@ function buildSleepAnnual(){
     const tc=e?'#fff':'var(--tm)';
     return `<div onclick="openSleepModal(${d},${month},${year})" style="background:${bg};border-radius:10px;padding:7px 5px;text-align:center;min-width:40px;cursor:pointer;transition:.15s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'"><div style="font-size:11px;font-weight:600;color:${tc}">${d}</div><div style="font-size:10px;color:${e?'rgba(255,255,255,.85)':'var(--tm)'}">${e?e.hours:'+'}</div></div>`;
   }).join('');
-  el.innerHTML=`<div style="text-align:center;margin-bottom:12px"><div style="font-size:12px;color:var(--tm);margin-bottom:3px">Moyenne du mois</div><div style="font-family:'Playfair Display',serif;font-size:26px">${avgStr}</div><div style="font-size:11px;color:var(--tm)">${filled} nuit${filled>1?'s':''} enregistrée${filled>1?'s':''}</div></div><div style="font-size:11px;color:var(--tm);margin-bottom:8px">Appuie sur un jour pour enregistrer</div><div style="display:flex;flex-wrap:wrap;gap:4px">${cells}</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#7BC47F"></div><span style="font-size:10px;color:var(--tm)">+8h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#C9A84C"></div><span style="font-size:10px;color:var(--tm)">7-8h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#F2A7B8"></div><span style="font-size:10px;color:var(--tm)">6-7h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#E88080"></div><span style="font-size:10px;color:var(--tm)">-6h</span></div></div>`;
+  el.innerHTML=`<div style="text-align:center;margin-bottom:12px"><div style="font-size:12px;color:var(--tm);margin-bottom:3px">Moyenne du mois</div><div style="font-family:'Poppins',sans-serif;font-size:26px">${avgStr}</div><div style="font-size:11px;color:var(--tm)">${filled} nuit${filled>1?'s':''} enregistrée${filled>1?'s':''}</div></div><div style="font-size:11px;color:var(--tm);margin-bottom:8px">Appuie sur un jour pour enregistrer</div><div style="display:flex;flex-wrap:wrap;gap:4px">${cells}</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#7BC47F"></div><span style="font-size:10px;color:var(--tm)">+8h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#C9A84C"></div><span style="font-size:10px;color:var(--tm)">7-8h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#F2A7B8"></div><span style="font-size:10px;color:var(--tm)">6-7h</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#E88080"></div><span style="font-size:10px;color:var(--tm)">-6h</span></div></div>`;
 }
 
 // ════════════════════════════════════
@@ -2588,7 +2605,7 @@ function renderCustomFoodList(){
 }
 function buildFoodSugg(){
   const all=[...HEALTHY_FOODS,...(S.customFoods||[])];
-  document.getElementById('food-sugg').innerHTML=all.map(f=>`<button onclick="qf('${f.name.replace(/'/g,"\'")}',${f.cal})" style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'DM Sans',sans-serif;transition:.15s" onmouseover="this.style.background='var(--al)'" onmouseout="this.style.background='#fff'">${f.name} <span style="color:var(--tm);font-size:11px">${f.cal} kcal${f.dose?' · '+f.dose:''}</span></button>`).join('');
+  document.getElementById('food-sugg').innerHTML=all.map(f=>`<button onclick="qf('${f.name.replace(/'/g,"\'")}',${f.cal})" style="display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border:1.5px solid var(--al);border-radius:50px;font-size:12px;cursor:pointer;background:#fff;font-family:'Poppins',sans-serif;transition:.15s" onmouseover="this.style.background='var(--al)'" onmouseout="this.style.background='#fff'">${f.name} <span style="color:var(--tm);font-size:11px">${f.cal} kcal${f.dose?' · '+f.dose:''}</span></button>`).join('');
 }
 function renderFoodList(){
   const el=document.getElementById('food-list');
@@ -2635,7 +2652,7 @@ function buildCalMonthly(){
     const tc=cal?'#fff':'var(--tm)';
     return `<div style="background:${bg};border-radius:9px;padding:7px 4px;text-align:center;min-width:38px"><div style="font-size:11px;font-weight:600;color:${tc}">${d}</div><div style="font-size:9px;color:${cal?'rgba(255,255,255,.85)':'var(--tm)'}">${cal||'+'}</div></div>`;
   }).join('');
-  el.innerHTML=`<div style="text-align:center;margin-bottom:12px"><div style="font-size:12px;color:var(--tm);margin-bottom:3px">Moyenne journalière</div><div style="font-family:'Playfair Display',serif;font-size:26px">${filled?Math.round(avg)+' kcal':'—'}</div><div style="font-size:11px;color:var(--tm)">${filled} jour${filled>1?'s':''} enregistré${filled>1?'s':''}</div></div><div style="display:flex;flex-wrap:wrap;gap:4px">${cells}</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#7BC47F"></div><span style="font-size:10px;color:var(--tm)">Objectif atteint</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#C9A84C"></div><span style="font-size:10px;color:var(--tm)">Proche</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#81D4FA"></div><span style="font-size:10px;color:var(--tm)">En dessous</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#E88080"></div><span style="font-size:10px;color:var(--tm)">Dépassé</span></div></div>`;
+  el.innerHTML=`<div style="text-align:center;margin-bottom:12px"><div style="font-size:12px;color:var(--tm);margin-bottom:3px">Moyenne journalière</div><div style="font-family:'Poppins',sans-serif;font-size:26px">${filled?Math.round(avg)+' kcal':'—'}</div><div style="font-size:11px;color:var(--tm)">${filled} jour${filled>1?'s':''} enregistré${filled>1?'s':''}</div></div><div style="display:flex;flex-wrap:wrap;gap:4px">${cells}</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#7BC47F"></div><span style="font-size:10px;color:var(--tm)">Objectif atteint</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#C9A84C"></div><span style="font-size:10px;color:var(--tm)">Proche</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#81D4FA"></div><span style="font-size:10px;color:var(--tm)">En dessous</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#E88080"></div><span style="font-size:10px;color:var(--tm)">Dépassé</span></div></div>`;
 }
 
 // ════════════════════════════════════
@@ -2871,7 +2888,7 @@ function renderTrips(){
       <button type="button" class="trip-del-btn" data-del-id="${t.id}" style="position:absolute;top:8px;right:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:50%;background:#fff;border:1px solid var(--al);z-index:10;cursor:pointer;color:var(--text);padding:0" aria-label="Supprimer">✕</button>
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-right:42px" data-open-id="${t.id}">
         <div style="flex:1;min-width:0" data-open-id="${t.id}">
-          <div style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:5px" data-open-id="${t.id}">${escapeHtml(t.dest)}</div>
+          <div style="font-family:'Poppins',sans-serif;font-size:20px;margin-bottom:5px" data-open-id="${t.id}">${escapeHtml(t.dest)}</div>
           <div style="font-size:13px;color:var(--tl);margin-bottom:6px" data-open-id="${t.id}">📅 ${dates}</div>
           ${status.label ? `<div style="font-size:12px;color:${status.color};font-weight:500;margin-bottom:8px" data-open-id="${t.id}">${status.label}</div>` : ''}
           <div style="display:flex;gap:6px;flex-wrap:wrap" data-open-id="${t.id}">
@@ -3108,7 +3125,7 @@ function renderContinents(){
           </div>
         </div>
         <div style="text-align:right">
-          <div style="font-family:'Playfair Display',serif;font-size:22px;color:${data.color}">${pct}%</div>
+          <div style="font-family:'Poppins',sans-serif;font-size:22px;color:${data.color}">${pct}%</div>
         </div>
       </div>
       <div style="background:var(--al);border-radius:50px;height:6px;overflow:hidden;margin-bottom:${unique.length?'12px':'0'}">
@@ -3316,8 +3333,8 @@ function renderHLog(){
   const gain=S.hRate?totalH*S.hRate:0;
   el.innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;background:var(--cream);border-radius:12px;padding:12px 14px;margin-bottom:12px">
-      <div><div style="font-size:11px;color:var(--tm);margin-bottom:2px">Total du mois</div><div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text)">${totalH.toFixed(1)}h</div></div>
-      ${S.hRate?`<div style="text-align:right"><div style="font-size:11px;color:var(--tm);margin-bottom:2px">Gagné</div><div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--green)">${gain.toFixed(2)} €</div></div>`:''}
+      <div><div style="font-size:11px;color:var(--tm);margin-bottom:2px">Total du mois</div><div style="font-family:'Poppins',sans-serif;font-size:18px;color:var(--text)">${totalH.toFixed(1)}h</div></div>
+      ${S.hRate?`<div style="text-align:right"><div style="font-size:11px;color:var(--tm);margin-bottom:2px">Gagné</div><div style="font-family:'Poppins',sans-serif;font-size:18px;color:var(--green)">${gain.toFixed(2)} €</div></div>`:''}
     </div>
     ${logs.map(l=>{
       const d=new Date(l.date+'T00:00:00');
@@ -3374,22 +3391,22 @@ function renderHStats(){
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div style="background:var(--cream);border-radius:14px;padding:16px;text-align:center">
         <div style="font-size:11px;color:var(--tm);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Heures ce mois</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--green)">${totalH.toFixed(1)}h</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:24px;color:var(--green)">${totalH.toFixed(1)}h</div>
         <div style="font-size:11px;color:var(--tm);margin-top:2px">${logs.length} jour${logs.length>1?'s':''}</div>
       </div>
       <div style="background:var(--cream);border-radius:14px;padding:16px;text-align:center">
         <div style="font-size:11px;color:var(--tm);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Gagné ce mois</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)">${gain.toFixed(2)} €</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:24px;color:var(--gold)">${gain.toFixed(2)} €</div>
         <div style="font-size:11px;color:var(--tm);margin-top:2px">à ${S.hRate.toFixed(2)} €/h</div>
       </div>
       <div style="background:var(--cream);border-radius:14px;padding:16px;text-align:center">
         <div style="font-size:11px;color:var(--tm);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Moy. / jour travaillé</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--ad)">${avgH.toFixed(1)}h</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:24px;color:var(--ad)">${avgH.toFixed(1)}h</div>
         <div style="font-size:11px;color:var(--tm);margin-top:2px">${avgH?(avgH*S.hRate).toFixed(2)+' €/j':'—'}</div>
       </div>
       <div style="background:var(--cream);border-radius:14px;padding:16px;text-align:center">
         <div style="font-size:11px;color:var(--tm);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Projection fin de mois</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;color:#7B2D8B">${projGain.toFixed(2)} €</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:24px;color:#7B2D8B">${projGain.toFixed(2)} €</div>
         <div style="font-size:11px;color:var(--tm);margin-top:2px">${daysLeft} jours restants</div>
       </div>
     </div>`;
@@ -3477,6 +3494,28 @@ function onChapSel(){
   chapInp.style.display=val?'none':'block';
 }
 
+let editFicheId=null;
+function openEditFiche(id){
+  const f=(S.fiches||[]).find(x=>x.id===id);if(!f)return;
+  editFicheId=id;
+  document.getElementById('edit-fiche-chap').value=f.chap||'';
+  document.getElementById('edit-fiche-q').value=f.q||'';
+  document.getElementById('edit-fiche-r').value=f.r||'';
+  document.getElementById('edit-fiche-modal').style.display='flex';
+}
+function saveEditFiche(){
+  if(!editFicheId)return;
+  const f=(S.fiches||[]).find(x=>x.id===editFicheId);if(!f)return;
+  const q=document.getElementById('edit-fiche-q').value.trim();
+  const r=document.getElementById('edit-fiche-r').value.trim();
+  if(!q||!r)return toast('Question et réponse requises 😊');
+  f.chap=document.getElementById('edit-fiche-chap').value.trim();
+  f.q=q;f.r=r;
+  editFicheId=null;
+  document.getElementById('edit-fiche-modal').style.display='none';
+  save();renderFiches();toast('Fiche modifiée ✅');
+}
+
 function addFiche(){
   const matSel=document.getElementById('fiche-mat-sel');
   const matInp=document.getElementById('fiche-mat');
@@ -3533,12 +3572,17 @@ function renderFiches(){
     const chapsHtml=Object.entries(chapObj).map(([chap,fiches])=>{
       const isNone=chap==='__none__';
       const fichesHtml=fiches.map(f=>`
-        <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;border:1.5px solid var(--al)">
-          <div style="flex:1">
-            <div style="font-size:14px;font-weight:500;margin-bottom:5px">❓ ${f.q}</div>
-            <div style="font-size:13px;color:var(--tl);background:var(--cream);border-radius:8px;padding:7px 10px">💡 ${f.r}</div>
+        <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:6px;border:1.5px solid var(--al)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:500;margin-bottom:5px">❓ ${f.q}</div>
+              <div style="font-size:13px;color:var(--tl);background:var(--cream);border-radius:8px;padding:7px 10px">💡 ${f.r}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+              <button onclick="openEditFiche(${f.id})" style="background:var(--al);border:none;border-radius:8px;padding:5px 8px;cursor:pointer;font-size:13px">✏️</button>
+              <button class="del" onclick="delFiche(${f.id})">✕</button>
+            </div>
           </div>
-          <button class="del" onclick="delFiche(${f.id})">✕</button>
         </div>`).join('');
       if(isNone){
         // Fiches sans chapitre : toujours visibles
@@ -3551,7 +3595,7 @@ function renderFiches(){
           <div style="display:flex;align-items:center;gap:10px">
             <span style="font-size:18px">📂</span>
             <div style="text-align:left">
-              <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--text)">${chap}</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:var(--text)">${chap}</div>
               <div style="font-size:11px;color:var(--tm);margin-top:1px">${fiches.length} question${fiches.length>1?'s':''}</div>
             </div>
           </div>
@@ -3703,7 +3747,7 @@ window.addEventListener('load',()=>{const isIOS=/iphone|ipad|ipod/i.test(navigat
 // ACCÈS PAR CODE
 // ════════════════════════════════════
 const LEGAL_CGV = `
-<div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:16px;color:var(--text)">Conditions Générales de Vente</div>
+<div style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;margin-bottom:16px;color:var(--text)">Conditions Générales de Vente</div>
 <p style="font-size:11px;color:var(--tm);margin-bottom:14px">Dernière mise à jour : avril 2026</p>
 
 <b>Vendeur</b><br>Orisa est une application web proposée par un particulier.<br>Contact : supportorisa@gmail.com<br><br>
@@ -3734,7 +3778,7 @@ Pour tout litige : supportorisa@gmail.com
 `;
 
 const LEGAL_PRIVACY = `
-<div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:16px;color:var(--text)">Politique de confidentialité</div>
+<div style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;margin-bottom:16px;color:var(--text)">Politique de confidentialité</div>
 <p style="font-size:11px;color:var(--tm);margin-bottom:14px">Dernière mise à jour : avril 2026</p>
 
 <b>Responsable du traitement</b><br>Orisa — contact : supportorisa@gmail.com<br><br>
