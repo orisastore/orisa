@@ -685,49 +685,8 @@ textarea.inp{resize:vertical;line-height:1.6}
     </div>
 
     <!-- MALADIE -->
-        <!-- GLYCEMIE TRACKER -->
-    <div class="pg" id="pg-glycemie">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-        <button onclick="go('maladie')" style="background:var(--al);border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text)">← Retour</button>
-        <div><div class="plbl" style="margin-bottom:1px">✶ Santé</div><div class="ptit" style="font-size:22px">Mon suivi glycémique</div></div>
-      </div>
-      <div class="card" style="margin-bottom:12px;padding:14px 18px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <button onclick="glycChangeDate(-1)" style="background:var(--al);border:none;border-radius:10px;padding:8px 13px;cursor:pointer;font-size:16px">‹</button>
-          <input type="date" id="glyc-date" class="inp" style="flex:1;text-align:center" oninput="renderGlycPage()">
-          <button onclick="glycChangeDate(1)" style="background:var(--al);border:none;border-radius:10px;padding:8px 13px;cursor:pointer;font-size:16px">›</button>
-        </div>
-        <div id="glyc-date-label" style="text-align:center;font-size:12px;color:var(--tm);margin-top:6px;text-transform:capitalize"></div>
-      </div>
-      <div class="g3" style="margin-bottom:14px">
-        <div class="stat"><div class="sv" id="glyc-avg" style="font-size:22px">—</div><div class="sl">Moy. g/L</div></div>
-        <div class="stat"><div class="sv" id="glyc-hypos" style="font-size:22px;color:#E88080">—</div><div class="sl">Hypos</div></div>
-        <div class="stat"><div class="sv" id="glyc-hypers" style="font-size:22px;color:#C9A84C">—</div><div class="sl">Hypers</div></div>
-      </div>
-      <div class="card" style="margin-bottom:12px;padding:14px 10px">
-        <div style="font-size:11px;color:var(--tm);font-weight:600;letter-spacing:1px;margin-bottom:8px;padding-left:4px">COURBE DU JOUR</div>
-        <div id="glyc-chart-wrap"></div>
-      </div>
-      <div class="card" style="margin-bottom:12px">
-        <div class="ctit">+ Nouvelle mesure</div>
-        <div class="row"><div style="flex:1"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Heure</div><input type="time" id="glyc-time" class="inp"></div><div style="flex:1"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Glycémie (g/L)</div><input type="number" step="0.01" min="0" placeholder="ex: 1.20" id="glyc-val" class="inp"></div></div>
-        <div class="row"><div style="flex:1"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Alimentation</div><div style="display:flex;gap:6px"><button class="btn btns btnxs" id="glyc-eat-0" onclick="glycPickEat(false)" style="flex:1">À jeun</button><button class="btn btns btnxs" id="glyc-eat-1" onclick="glycPickEat(true)" style="flex:1">Repas</button></div></div><div style="flex:1"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Insuline (U)</div><input type="number" step="0.5" min="0" placeholder="ex: 8" id="glyc-insulin" class="inp"></div></div>
-        <div id="glyc-meal-row" style="display:none;margin-bottom:10px"><div style="font-size:11px;color:var(--tm);margin-bottom:4px">Moment du repas</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btns btnxs" onclick="glycPickMeal('petit-dejeuner')" id="gm-pdj">🌅 Petit-déj</button><button class="btn btns btnxs" onclick="glycPickMeal('dejeuner')" id="gm-dej">☀️ Déjeuner</button><button class="btn btns btnxs" onclick="glycPickMeal('diner')" id="gm-din">🌙 Dîner</button><button class="btn btns btnxs" onclick="glycPickMeal('collation')" id="gm-col">🍎 Collation</button></div></div>
-        <input type="text" placeholder="Note (ex: stressée, sport...)" id="glyc-note" class="inp" style="margin-bottom:10px">
-        <button class="btn btnp" style="width:100%" onclick="addGlycEntry()">✓ Enregistrer</button>
-      </div>
-      <div class="card"><div class="ctit">Mesures du jour</div><div id="glyc-list"></div></div>
-    </div>
-
-<div class="pg" id="pg-maladie">
+    <div class="pg" id="pg-maladie">
       <div class="plbl">✦ Bien-être</div><div class="ptit">Maladie</div><div class="pdsc">Suivi de ta santé 💊</div>
-      <div class="card">
-              <div class="card" style="margin-bottom:16px">
-        <div class="ctit">🩺 Mes maladies</div>
-        <div id="disease-list" style="margin-bottom:14px"></div>
-        <div style="font-size:11px;color:var(--tm);margin-bottom:8px;font-weight:600;letter-spacing:.5px">AJOUTER UNE MALADIE</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btns btnxs" id="add-disease-diabete" onclick="addDisease('Diabète','🩸')">🩸 Diabète</button></div>
-      </div>
       <div class="card">
         <div class="ctit">Symptômes du jour</div>
         <div class="row"><input class="inp" id="sym-n" placeholder="Ex: Mal de tête..." style="flex:2">
@@ -1422,8 +1381,6 @@ let S = {
   moodByMonth:{},
   sleepData:[],
   habits:[],habitChecks:{},
-  diseases:[],
-  glycEntries:[],
   symptoms:[],meds:[],rdvs:[],medNotes:'',
   sportSessions:[],weights:[],
   gratEntries:[],
@@ -1674,7 +1631,7 @@ function initApp(){
   initMoodState();
   // Build pages
   buildChallengeCal();buildMoodCal();buildMealWeek();buildPlanGrid();buildCycleCalendar();
-  renderExp();renderBuyList();renderHabits();renderGrat();renderSyms();renderMeds();renderRdvs();renderSport();renderFoodList();buildFoodSugg();renderDiseases();
+  renderExp();renderBuyList();renderHabits();renderGrat();renderSyms();renderMeds();renderRdvs();renderSport();renderFoodList();buildFoodSugg();
   updateBudget();updateCalories();checkRdvs();buildNextEvent();buildDailyTip();updateDashStats();
   renderExp();renderRecur();
   initTodos();
@@ -1705,8 +1662,6 @@ function go(id){
   if(id==='monde'){setTimeout(()=>{try{initWorldMap();updateCountersMap();}catch(e){}},50);}
   if(id==='voyage'){try{renderTrips();}catch(e){}}
   if(id==='fiches'){try{renderFiches();}catch(e){}}
-  if(id==='maladie'){try{renderDiseases();}catch(e){}}
-  if(id==='glycemie'){try{initGlycPage();}catch(e){}}
   closeSb();
 }
 function openSb(){document.getElementById('sb').classList.add('on');document.getElementById('sbo').classList.add('on');}
@@ -2469,117 +2424,6 @@ function renderHabits(){
 // ════════════════════════════════════
 let curInt='léger';
 function pickInt(v){curInt=v;['l','m','f'].forEach(x=>document.getElementById('int-'+x).classList.remove('on'));const map={léger:'l',modéré:'m',fort:'f'};const btn=document.getElementById('int-'+map[v]);if(btn){btn.classList.add('on');btn.style.background=v==='fort'?'#FFE8E8':v==='modéré'?'#FFF3E0':'#E8F5E9';}}
-
-// ════ MALADIES ════
-function addDisease(name,emoji){if(!S.diseases)S.diseases=[];if(S.diseases.find(d=>d.name===name))return toast('Deja ajoutee');S.diseases.push({id:Date.now(),name,emoji});save();renderDiseases();toast(emoji+' '+name+' ajoutee');}
-function removeDisease(id){S.diseases=(S.diseases||[]).filter(d=>d.id!==id);save();renderDiseases();}
-function renderDiseases(){
-  const el=document.getElementById('disease-list');if(!el)return;
-  if(!S.diseases||!S.diseases.length){el.innerHTML='<div class="emp" style="padding:14px 0"><div class="ei" style="font-size:28px">&#x1FA7A;</div><div class="et">Aucune maladie ajout&#233;e</div></div>';
-    const ab=document.getElementById('add-disease-diabete');if(ab)ab.style.display='';return;}
-  const cols={'Diab\u00e8te':{bg:'#FFF3E0',border:'#F4C97A',txt:'#b07f1a'}};
-  el.innerHTML=S.diseases.map(d=>{const c=cols[d.name]||{bg:'var(--al)',border:'var(--a)',txt:'var(--text)'};
-    return '<div style="display:flex;align-items:center;justify-content:space-between;background:'+c.bg+';border:1.5px solid '+c.border+';border-radius:14px;padding:12px 14px;margin-bottom:8px">'
-    +'<div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">'+d.emoji+'</span>'
-    +'<div><div style="font-size:14px;font-weight:600;color:'+c.txt+'">'+d.name+'</div><div style="font-size:11px;color:var(--tm)">Maladie chronique</div></div></div>'
-    +'<div style="display:flex;align-items:center;gap:8px">'
-    +(d.name==='Diab\u00e8te'?'<button onclick="go(\'glycemie\')" style="background:linear-gradient(135deg,#b49fd8,#8fc1d4);border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;font-family:\'DM Sans\',sans-serif">&#x1F4C8; Ouvrir mon suivi</button>':'')
-    +'<button class="del" onclick="removeDisease('+d.id+')">&#x2715;</button></div></div>';}).join('');
-  const ab=document.getElementById('add-disease-diabete');if(ab)ab.style.display=S.diseases.find(d=>d.name==='Diab\u00e8te')?'none':'';
-}
-// ════ GLYCEMIE ════
-let glycHasEaten=null,glycMealType='';
-function initGlycPage(){
-  const today=new Date().toISOString().split('T')[0];
-  const inp=document.getElementById('glyc-date');if(inp&&!inp.value)inp.value=today;
-  const ti=document.getElementById('glyc-time');if(ti)ti.value=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-  glycHasEaten=null;glycMealType='';renderGlycPage();
-}
-function glycChangeDate(delta){const inp=document.getElementById('glyc-date');if(!inp)return;const d=new Date(inp.value);d.setDate(d.getDate()+delta);inp.value=d.toISOString().split('T')[0];renderGlycPage();}
-function glycPickEat(val){
-  glycHasEaten=val;
-  const b0=document.getElementById('glyc-eat-0'),b1=document.getElementById('glyc-eat-1');
-  if(b0){b0.style.background=val===false?'var(--ad)':'';b0.style.color=val===false?'#fff':'';}
-  if(b1){b1.style.background=val===true?'var(--ad)':'';b1.style.color=val===true?'#fff':'';}
-  const mr=document.getElementById('glyc-meal-row');if(mr)mr.style.display=val?'block':'none';
-}
-function glycPickMeal(type){
-  glycMealType=type;
-  ['pdj','dej','din','col'].forEach(k=>{const b=document.getElementById('gm-'+k);if(b){b.style.background='';b.style.color='';}});
-  const map={'petit-dejeuner':'pdj','dejeuner':'dej','diner':'din','collation':'col'};
-  const b=document.getElementById('gm-'+map[type]);if(b){b.style.background='var(--ad)';b.style.color='#fff';}
-}
-function getGlycColor(v){return v<0.7?'#E88080':v<=1.8?'#7BC47F':'#C9A84C';}
-function getGlycLabel(v){return v<0.7?'Hypo':v<=1.8?'Cible':'Hyper';}
-function addGlycEntry(){
-  const date=document.getElementById('glyc-date').value;
-  const time=document.getElementById('glyc-time').value;
-  const val=document.getElementById('glyc-val').value;
-  const insulin=document.getElementById('glyc-insulin').value;
-  const note=document.getElementById('glyc-note').value.trim();
-  if(!val&&!insulin)return toast('Ajoute une glyc\u00e9mie ou une dose');
-  if(!S.glycEntries)S.glycEntries=[];
-  S.glycEntries.push({id:Date.now(),date,time,glycemia:val?parseFloat(val):null,hasEaten:glycHasEaten,mealType:glycMealType,insulinDose:insulin?parseFloat(insulin):null,note});
-  document.getElementById('glyc-val').value='';document.getElementById('glyc-insulin').value='';document.getElementById('glyc-note').value='';
-  document.getElementById('glyc-time').value=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-  glycHasEaten=null;glycMealType='';glycPickEat(null);save();renderGlycPage();toast('Mesure enregistr\u00e9e \u2713');
-}
-function delGlycEntry(id){S.glycEntries=(S.glycEntries||[]).filter(e=>e.id!==id);save();renderGlycPage();}
-function renderGlycPage(){
-  const dateInp=document.getElementById('glyc-date');if(!dateInp)return;
-  const date=dateInp.value;
-  const lbl=document.getElementById('glyc-date-label');
-  if(lbl)lbl.textContent=new Date(date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
-  const entries=(S.glycEntries||[]).filter(e=>e.date===date).sort((a,b)=>a.time.localeCompare(b.time));
-  const withG=entries.filter(e=>e.glycemia!==null);
-  const avg=withG.length?(withG.reduce((s,e)=>s+e.glycemia,0)/withG.length).toFixed(2):'\u2014';
-  document.getElementById('glyc-avg').textContent=avg;
-  document.getElementById('glyc-hypos').textContent=withG.length?withG.filter(e=>e.glycemia<0.7).length:'\u2014';
-  document.getElementById('glyc-hypers').textContent=withG.length?withG.filter(e=>e.glycemia>1.8).length:'\u2014';
-  renderGlycChart(entries);
-  const el=document.getElementById('glyc-list');
-  if(!entries.length){el.innerHTML='<div class="emp"><div class="ei">&#x1FA78;</div><div class="et">Aucune mesure ce jour</div></div>';return;}
-  const ml={'petit-dejeuner':'\uD83C\uDF05 Petit-d\u00e9j','dejeuner':'\u2600\uFE0F D\u00e9jeuner','diner':'\uD83C\uDF19 D\u00eener','collation':'\uD83C\uDF4E Collation'};
-  el.innerHTML=entries.map(e=>{
-    const col=e.glycemia!==null?getGlycColor(e.glycemia):'#b0a0c8';
-    return '<div class="li">'
-    +'<div style="min-width:38px;text-align:center"><div style="font-size:10px;color:var(--tm);font-weight:700">'+e.time+'</div></div>'
-    +'<div class="lii">'
-    +(e.glycemia!==null?'<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="font-size:18px;font-weight:800;color:'+col+'">'+e.glycemia.toFixed(2)+'</span><span style="font-size:10px;color:var(--tm)">g/L</span><span style="background:'+col+'22;color:'+col+';border:1px solid '+col+';border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">'+getGlycLabel(e.glycemia)+'</span></div>':'')
-    +'<div style="display:flex;flex-wrap:wrap;gap:4px">'
-    +(e.insulinDose?'<span style="font-size:10px;background:#edf4fd;color:#5a90c0;border-radius:8px;padding:2px 7px">&#x1F489; '+e.insulinDose+'U</span>':'')
-    +(e.hasEaten===true?'<span style="font-size:10px;background:#edf7f0;color:#4a8c60;border-radius:8px;padding:2px 7px">'+(ml[e.mealType]||'&#x1F37D;&#xFE0F; Repas')+'</span>':'')
-    +(e.hasEaten===false?'<span style="font-size:10px;background:#f5f0fc;color:#9b8ab5;border-radius:8px;padding:2px 7px">&#x2B55; \u00C0 jeun</span>':'')
-    +(e.note?'<span style="font-size:10px;background:#fef9ec;color:#b07f1a;border-radius:8px;padding:2px 7px">&#x1F4DD; '+e.note+'</span>':'')
-    +'</div></div><button class="del" onclick="delGlycEntry('+e.id+')">&#x2715;</button></div>';
-  }).join('');
-}
-function renderGlycChart(entries){
-  const el=document.getElementById('glyc-chart-wrap');if(!el)return;
-  const withG=entries.filter(e=>e.glycemia!==null);
-  if(withG.length<2){el.innerHTML='<div style="text-align:center;color:#c9b8d8;font-size:12px;padding:20px 0">'+(withG.length===1?'1 mesure \u2014 ajouter d\u2019autres pour voir la courbe':'Aucune mesure avec glyc\u00e9mie')+'</div>';return;}
-  const W=320,H=110,PL=36,PR=12,PT=16,PB=24,cW=W-PL-PR,cH=H-PT-PB;
-  const vals=withG.map(e=>e.glycemia),minV=Math.max(0,Math.min(...vals)-0.3),maxV=Math.max(...vals)+0.3;
-  function tM(t){const[h,m]=t.split(':').map(Number);return h*60+m;}
-  const times=withG.map(e=>tM(e.time)),minT=Math.min(...times),maxT=Math.max(...times),rT=maxT-minT||60;
-  function xP(t){return PL+((tM(t)-minT)/rT)*cW;}
-  function yP(v){return PT+(1-(v-minV)/(maxV-minV))*cH;}
-  const pts=withG.map(e=>xP(e.time)+','+yP(e.glycemia)).join(' ');
-  const area=xP(withG[0].time)+','+(PT+cH)+' '+pts+' '+xP(withG[withG.length-1].time)+','+(PT+cH);
-  const y07=yP(0.7),y18=yP(1.8);
-  el.innerHTML='<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="display:block">'
-    +'<defs><linearGradient id="gGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b49fd8" stop-opacity="0.25"/><stop offset="100%" stop-color="#b49fd8" stop-opacity="0.02"/></linearGradient></defs>'
-    +'<rect x="'+PL+'" y="'+Math.min(y07,y18)+'" width="'+cW+'" height="'+Math.abs(y07-y18)+'" fill="#7BC47F15" rx="2"/>'
-    +'<line x1="'+PL+'" y1="'+y07+'" x2="'+(PL+cW)+'" y2="'+y07+'" stroke="#7BC47F" stroke-width="1" stroke-dasharray="4 3"/>'
-    +'<line x1="'+PL+'" y1="'+y18+'" x2="'+(PL+cW)+'" y2="'+y18+'" stroke="#7BC47F" stroke-width="1" stroke-dasharray="4 3"/>'
-    +'<text x="'+(PL-4)+'" y="'+(y07+4)+'" text-anchor="end" font-size="9" fill="#7BC47F">0.7</text>'
-    +'<text x="'+(PL-4)+'" y="'+(y18+4)+'" text-anchor="end" font-size="9" fill="#7BC47F">1.8</text>'
-    +'<polygon points="'+area+'" fill="url(#gGrad)"/>'
-    +'<polyline points="'+pts+'" fill="none" stroke="#b49fd8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'
-    +withG.map(e=>{const x=xP(e.time),y=yP(e.glycemia),c=getGlycColor(e.glycemia);return '<circle cx="'+x+'" cy="'+y+'" r="5" fill="white" stroke="'+c+'" stroke-width="2.5"/><text x="'+x+'" y="'+(y-9)+'" text-anchor="middle" font-size="9" font-weight="700" fill="'+c+'">'+e.glycemia.toFixed(2)+'</text><text x="'+x+'" y="'+(H-4)+'" text-anchor="middle" font-size="8" fill="#b0a0c8">'+e.time+'</text>';}).join('')
-    +'</svg>';
-}
-
 function addSym(){const n=document.getElementById('sym-n').value.trim();if(!n)return toast('Décris le symptôme 😊');S.symptoms.push({id:Date.now(),name:n,intensity:curInt,date:new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'short'})});document.getElementById('sym-n').value='';save();renderSyms();toast('Symptôme ajouté');}
 function delSym(id){S.symptoms=S.symptoms.filter(x=>x.id!==id);save();renderSyms();}
 function renderSyms(){const el=document.getElementById('sym-list');if(!S.symptoms||!S.symptoms.length){el.innerHTML='<div class="emp"><div class="ei">🩺</div><div class="et">Aucun symptôme</div></div>';return;}const ic={léger:'#E8F5E9',modéré:'#FFF3E0',fort:'#FFE8E8'};el.innerHTML=S.symptoms.slice().reverse().map(s=>`<div class="li"><div class="icb" style="background:${ic[s.intensity]||'#fff'}">🩺</div><div class="lii"><div class="ln">${s.name}</div><div class="ls">${s.intensity} · ${s.date}</div></div><button class="del" onclick="delSym(${s.id})">✕</button></div>`).join('');}
